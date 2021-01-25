@@ -8,6 +8,9 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
+    
+    let userWebServices: UserWebServices = UserWebServices()
+    
     @IBOutlet weak var pseudoTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
@@ -59,6 +62,18 @@ class SignUpViewController: UIViewController {
         }
         
         let user = User(nickname: nickname, password: password, phone: phone)
+        self.userWebServices.signUp(user: user) { (newUser) in
+            guard let connectedUser = newUser else {
+                let alert = UIAlertController(title: "Erreur lors de l'inscription", message: "Vérifiez les informations ou votre connexion internet.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            UserDefaults.standard.setValue(connectedUser.id, forKey: "idUser")
+            let mainMenuViewController = MainMenuViewController.newInstance(user: connectedUser)
+            self.navigationController?.pushViewController(mainMenuViewController, animated: true)
+        }
         
     }
     

@@ -15,9 +15,15 @@
 		930A8AFB25B1B1A4001D91CF /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 930A8AF925B1B1A4001D91CF /* WelcomeViewController.xib */; };
 		930A8B0525B1DE29001D91CF /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930A8B0425B1DE29001D91CF /* GameKit.framework */; };
 		930A8B4025B25E24001D91CF /* KGRedHands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 930A8B3D25B25E24001D91CF /* KGRedHands.ttf */; };
+		9345B7DF25BDAF0700E2B406 /* InGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9345B7DD25BDAF0700E2B406 /* InGameViewController.swift */; };
+		9345B7E025BDAF0700E2B406 /* InGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9345B7DE25BDAF0700E2B406 /* InGameViewController.xib */; };
+		9365846C25BEDE82002E6CB6 /* UserWebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9365846B25BEDE82002E6CB6 /* UserWebServices.swift */; };
+		9365847325BEDEEE002E6CB6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9365847225BEDEEE002E6CB6 /* API.swift */; };
 		9366E07225BB58D20043DEE0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9366E07125BB58D20043DEE0 /* User.swift */; };
 		9366E07725BB58DE0043DEE0 /* UserFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9366E07625BB58DE0043DEE0 /* UserFactory.swift */; };
 		937FE0D825BB41AA00527447 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937FE0D725BB41AA00527447 /* UITextField.swift */; };
+		9398948925BEE1C400906699 /* ApiResponseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9398948825BEE1C400906699 /* ApiResponseFactory.swift */; };
+		9398948E25BEE20B00906699 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9398948D25BEE20B00906699 /* ApiResponse.swift */; };
 		93AC010825B8BB02009F29CF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AC010625B8BB02009F29CF /* LoginViewController.swift */; };
 		93AC010925B8BB02009F29CF /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93AC010725B8BB02009F29CF /* LoginViewController.xib */; };
 		93AC011225B8BB22009F29CF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AC011025B8BB22009F29CF /* SignUpViewController.swift */; };
@@ -61,9 +67,15 @@
 		930A8AF925B1B1A4001D91CF /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 		930A8B0425B1DE29001D91CF /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		930A8B3D25B25E24001D91CF /* KGRedHands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KGRedHands.ttf; sourceTree = "<group>"; };
+		9345B7DD25BDAF0700E2B406 /* InGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InGameViewController.swift; sourceTree = "<group>"; };
+		9345B7DE25BDAF0700E2B406 /* InGameViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InGameViewController.xib; sourceTree = "<group>"; };
+		9365846B25BEDE82002E6CB6 /* UserWebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWebServices.swift; sourceTree = "<group>"; };
+		9365847225BEDEEE002E6CB6 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		9366E07125BB58D20043DEE0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9366E07625BB58DE0043DEE0 /* UserFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFactory.swift; sourceTree = "<group>"; };
 		937FE0D725BB41AA00527447 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		9398948825BEE1C400906699 /* ApiResponseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponseFactory.swift; sourceTree = "<group>"; };
+		9398948D25BEE20B00906699 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		93AC010625B8BB02009F29CF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		93AC010725B8BB02009F29CF /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		93AC011025B8BB22009F29CF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -129,16 +141,11 @@
 				9366E07025BB58BE0043DEE0 /* Services */,
 				9366E06F25BB58B50043DEE0 /* Models */,
 				93AC011E25B8C041009F29CF /* Extensions */,
-				93AC010525B8BAF1009F29CF /* ScreenLogin */,
-				93DE44CF25BB89090040AE5E /* ScreenMenu */,
+				9345B7E725BEDA4300E2B406 /* Screens */,
 				930A8B3B25B25E24001D91CF /* fonts */,
 				930A8ABE25B1B01B001D91CF /* AppDelegate.swift */,
 				930A8AC725B1B01C001D91CF /* Assets.xcassets */,
 				930A8ACC25B1B01C001D91CF /* Info.plist */,
-				930A8AF825B1B1A4001D91CF /* WelcomeViewController.swift */,
-				930A8AF925B1B1A4001D91CF /* WelcomeViewController.xib */,
-				93AC011725B8BB79009F29CF /* WaitingScreenViewController.swift */,
-				93AC011825B8BB79009F29CF /* WaitingScreenViewController.xib */,
 			);
 			path = blindTestiOS;
 			sourceTree = "<group>";
@@ -177,10 +184,59 @@
 			path = fonts;
 			sourceTree = SOURCE_ROOT;
 		};
+		9345B7DC25BDAEE200E2B406 /* ScreenGame */ = {
+			isa = PBXGroup;
+			children = (
+				9345B7DD25BDAF0700E2B406 /* InGameViewController.swift */,
+				9345B7DE25BDAF0700E2B406 /* InGameViewController.xib */,
+			);
+			path = ScreenGame;
+			sourceTree = "<group>";
+		};
+		9345B7E725BEDA4300E2B406 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				9345B7E825BEDA5700E2B406 /* ScreenWelcome */,
+				93AC010525B8BAF1009F29CF /* ScreenLogin */,
+				93DE44CF25BB89090040AE5E /* ScreenMenu */,
+				9345B7DC25BDAEE200E2B406 /* ScreenGame */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		9345B7E825BEDA5700E2B406 /* ScreenWelcome */ = {
+			isa = PBXGroup;
+			children = (
+				930A8AF825B1B1A4001D91CF /* WelcomeViewController.swift */,
+				930A8AF925B1B1A4001D91CF /* WelcomeViewController.xib */,
+				93AC011725B8BB79009F29CF /* WaitingScreenViewController.swift */,
+				93AC011825B8BB79009F29CF /* WaitingScreenViewController.xib */,
+			);
+			path = ScreenWelcome;
+			sourceTree = "<group>";
+		};
+		9365847025BEDE86002E6CB6 /* Http */ = {
+			isa = PBXGroup;
+			children = (
+				9365846B25BEDE82002E6CB6 /* UserWebServices.swift */,
+			);
+			path = Http;
+			sourceTree = "<group>";
+		};
+		9365847125BEDE90002E6CB6 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				9398948825BEE1C400906699 /* ApiResponseFactory.swift */,
+				9366E07625BB58DE0043DEE0 /* UserFactory.swift */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
 		9366E06F25BB58B50043DEE0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				9366E07125BB58D20043DEE0 /* User.swift */,
+				9398948D25BEE20B00906699 /* ApiResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -188,7 +244,9 @@
 		9366E07025BB58BE0043DEE0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				9366E07625BB58DE0043DEE0 /* UserFactory.swift */,
+				9365847025BEDE86002E6CB6 /* Http */,
+				9365847125BEDE90002E6CB6 /* Factories */,
+				9365847225BEDEEE002E6CB6 /* API.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -326,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93DE44D625BB89550040AE5E /* MainMenuViewController.xib in Resources */,
+				9345B7E025BDAF0700E2B406 /* InGameViewController.xib in Resources */,
 				93AC011A25B8BB79009F29CF /* WaitingScreenViewController.xib in Resources */,
 				93AC011325B8BB22009F29CF /* SignUpViewController.xib in Resources */,
 				93AC010925B8BB02009F29CF /* LoginViewController.xib in Resources */,
@@ -357,11 +416,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				93AC010825B8BB02009F29CF /* LoginViewController.swift in Sources */,
+				9365846C25BEDE82002E6CB6 /* UserWebServices.swift in Sources */,
 				93AC011925B8BB79009F29CF /* WaitingScreenViewController.swift in Sources */,
+				9398948E25BEE20B00906699 /* ApiResponse.swift in Sources */,
 				937FE0D825BB41AA00527447 /* UITextField.swift in Sources */,
 				930A8ABF25B1B01B001D91CF /* AppDelegate.swift in Sources */,
 				9366E07725BB58DE0043DEE0 /* UserFactory.swift in Sources */,
+				9398948925BEE1C400906699 /* ApiResponseFactory.swift in Sources */,
+				9345B7DF25BDAF0700E2B406 /* InGameViewController.swift in Sources */,
 				9366E07225BB58D20043DEE0 /* User.swift in Sources */,
+				9365847325BEDEEE002E6CB6 /* API.swift in Sources */,
 				93DE44D525BB89550040AE5E /* MainMenuViewController.swift in Sources */,
 				93AC011225B8BB22009F29CF /* SignUpViewController.swift in Sources */,
 				93AC012025B8C059009F29CF /* UiViewController.swift in Sources */,
