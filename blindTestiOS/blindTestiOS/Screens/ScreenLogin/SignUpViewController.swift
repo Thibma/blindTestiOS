@@ -60,10 +60,11 @@ class SignUpViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
             return
         }
-        
+        self.showSpinner(onView: self.view)
         let user = User(nickname: nickname, password: password, phone: phone)
         self.userWebServices.signUp(user: user) { (newUser) in
             guard let connectedUser = newUser else {
+                self.removeSpinner()
                 let alert = UIAlertController(title: "Erreur lors de l'inscription", message: "Vérifiez les informations ou votre connexion internet.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
@@ -72,6 +73,7 @@ class SignUpViewController: UIViewController {
             
             UserDefaults.standard.setValue(connectedUser.id, forKey: "idUser")
             let mainMenuViewController = MainMenuViewController.newInstance(user: connectedUser)
+            self.removeSpinner()
             self.navigationController?.pushViewController(mainMenuViewController, animated: true)
         }
         

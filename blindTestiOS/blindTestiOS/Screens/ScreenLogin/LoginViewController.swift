@@ -25,6 +25,13 @@ class LoginViewController: UIViewController {
         
         self.connexionButton.layer.cornerRadius = 8
         self.cancelButton.layer.cornerRadius = 8
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 
     @IBAction func touchConnexionButton(_ sender: Any) {
@@ -39,8 +46,10 @@ class LoginViewController: UIViewController {
         }
         
         let user = User(nickname: nickname, password: password)
+        self.showSpinner(onView: self.view)
         self.userWebServices.signIn(user: user) { (newUser) in
             guard let connectedUser = newUser else {
+                self.removeSpinner()
                 let alert = UIAlertController(title: "Erreur de connexion", message: "Vérifiez le login/mot de passe ou votre connexion.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
@@ -48,6 +57,7 @@ class LoginViewController: UIViewController {
             }
             UserDefaults.standard.setValue(connectedUser.id, forKey: "idUser")
             let mainMenuViewController = MainMenuViewController.newInstance(user: connectedUser)
+            self.removeSpinner()
             self.navigationController?.pushViewController(mainMenuViewController, animated: true)
         }
         

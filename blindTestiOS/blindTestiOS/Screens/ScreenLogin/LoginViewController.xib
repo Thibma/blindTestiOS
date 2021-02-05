@@ -45,6 +45,7 @@
                                     <constraints>
                                         <constraint firstAttribute="width" constant="250" id="27i-gb-rI1"/>
                                     </constraints>
+                                    <color key="textColor" name="AccentColor"/>
                                     <fontDescription key="fontDescription" name="KGRedHands" family="KG Red Hands" pointSize="17"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="nickname"/>
                                 </textField>
@@ -53,6 +54,7 @@
                                     <constraints>
                                         <constraint firstAttribute="width" constant="250" id="TH2-qD-yIr"/>
                                     </constraints>
+                                    <color key="textColor" name="AccentColor"/>
                                     <fontDescription key="fontDescription" name="KGRedHands" family="KG Red Hands" pointSize="17"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES" textContentType="password"/>
                                 </textField>
@@ -112,6 +114,9 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="AccentColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Primary">
             <color red="0.59999999999999998" green="0.73333333333333328" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
