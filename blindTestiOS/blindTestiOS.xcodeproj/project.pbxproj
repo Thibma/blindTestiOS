@@ -44,10 +44,10 @@
 		93BA3C3E25C9A2F7001520D2 /* GameplayWebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BA3C3D25C9A2F7001520D2 /* GameplayWebServices.swift */; };
 		93BA3C4325C9A639001520D2 /* GameplayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BA3C4225C9A639001520D2 /* GameplayFactory.swift */; };
 		93BA3C4825C9CBCC001520D2 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BA3C4725C9CBCC001520D2 /* Theme.swift */; };
-		93BA3C4D25C9CE2F001520D2 /* ThemeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BA3C4C25C9CE2F001520D2 /* ThemeFactory.swift */; };
 		93BA3C5525C9CEB7001520D2 /* ThemeWebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BA3C5425C9CEB7001520D2 /* ThemeWebServices.swift */; };
 		93DE44D525BB89550040AE5E /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DE44D325BB89550040AE5E /* MainMenuViewController.swift */; };
 		93DE44D625BB89550040AE5E /* MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93DE44D425BB89550040AE5E /* MainMenuViewController.xib */; };
+		93F13DDF25D14D4E00C0EA8A /* ThemeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F13DDE25D14D4E00C0EA8A /* ThemeFactory.swift */; };
 		93F16BDF25CC62D5007DB346 /* TimerCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F16BDE25CC62D5007DB346 /* TimerCircle.swift */; };
 		93F16BE725CC69BD007DB346 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F16BE625CC69BD007DB346 /* Music.swift */; };
 		93F16BEC25CC69C7007DB346 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F16BEB25CC69C7007DB346 /* Detail.swift */; };
@@ -120,10 +120,10 @@
 		93BA3C3D25C9A2F7001520D2 /* GameplayWebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayWebServices.swift; sourceTree = "<group>"; };
 		93BA3C4225C9A639001520D2 /* GameplayFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayFactory.swift; sourceTree = "<group>"; };
 		93BA3C4725C9CBCC001520D2 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		93BA3C4C25C9CE2F001520D2 /* ThemeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeFactory.swift; sourceTree = "<group>"; };
 		93BA3C5425C9CEB7001520D2 /* ThemeWebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeWebServices.swift; sourceTree = "<group>"; };
 		93DE44D325BB89550040AE5E /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		93DE44D425BB89550040AE5E /* MainMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenuViewController.xib; sourceTree = "<group>"; };
+		93F13DDE25D14D4E00C0EA8A /* ThemeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeFactory.swift; sourceTree = "<group>"; };
 		93F16BDE25CC62D5007DB346 /* TimerCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCircle.swift; sourceTree = "<group>"; };
 		93F16BE625CC69BD007DB346 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		93F16BEB25CC69C7007DB346 /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
@@ -285,9 +285,9 @@
 				9398948825BEE1C400906699 /* ApiResponseFactory.swift */,
 				9366E07625BB58DE0043DEE0 /* UserFactory.swift */,
 				93BA3C4225C9A639001520D2 /* GameplayFactory.swift */,
-				93BA3C4C25C9CE2F001520D2 /* ThemeFactory.swift */,
 				93F16BFF25CC7DB6007DB346 /* SongFactory.swift */,
 				93F16C0425CC89BA007DB346 /* DetailFactory.swift */,
+				93F13DDE25D14D4E00C0EA8A /* ThemeFactory.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -502,6 +502,7 @@
 				93AC011925B8BB79009F29CF /* WaitingScreenViewController.swift in Sources */,
 				93F16BF125CC6E7A007DB346 /* Blindtest.swift in Sources */,
 				9398948E25BEE20B00906699 /* ApiResponse.swift in Sources */,
+				93F13DDF25D14D4E00C0EA8A /* ThemeFactory.swift in Sources */,
 				93BA3C5525C9CEB7001520D2 /* ThemeWebServices.swift in Sources */,
 				937FE0D825BB41AA00527447 /* UITextField.swift in Sources */,
 				930A8ABF25B1B01B001D91CF /* AppDelegate.swift in Sources */,
@@ -522,7 +523,6 @@
 				93BA3C4325C9A639001520D2 /* GameplayFactory.swift in Sources */,
 				93AC011225B8BB22009F29CF /* SignUpViewController.swift in Sources */,
 				93F16C0A25CC8B43007DB346 /* DetailWebServices.swift in Sources */,
-				93BA3C4D25C9CE2F001520D2 /* ThemeFactory.swift in Sources */,
 				93AC012025B8C059009F29CF /* UiViewController.swift in Sources */,
 				93F16BDF25CC62D5007DB346 /* TimerCircle.swift in Sources */,
 				930A8AFA25B1B1A4001D91CF /* WelcomeViewController.swift in Sources */,
