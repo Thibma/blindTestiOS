@@ -100,4 +100,31 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
             }
         }
     }
+    
+    func accessoryBrowser(_ browser: HMAccessoryBrowser, didFindNewAccessory accessory: HMAccessory) {
+        print("Found a new accessory \(accessory)")
+        print("Adding it to the home...")
+        
+        home.addAccessory(accessory){(error: Error!) in
+            let strongSelf = self
+            if error != nil {
+                print("Failed to add the accessory to the home")
+                print("Error = \(String(describing: error))")
+                return
+            }
+            
+            print("Successfully added the accessory to the home")
+            print("Assigning the accessory to the room...")
+            
+            strongSelf.home.assignAccessory(accessory, to: strongSelf.room) {(error: Error!) in
+                if error != nil{
+                    print("Failed to assign the accessory to the room")
+                    print("Error = \(String(describing: error))")
+                    return
+                }
+                print("Successfully assigned the accessory to the room")
+                //strongSelf.findServicesForAccessory(accessory)
+            }
+        }
+    }
 }
