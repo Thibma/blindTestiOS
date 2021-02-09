@@ -18,7 +18,7 @@ class OptionMenuViewController: UIViewController {
     
     
     
-    var accessories = [HMAccessory]()
+    //var accessories = [HMAccessory]()
     var home: HMHome!
     var room: HMRoom!
     var accessory = HMAccessory()
@@ -75,6 +75,26 @@ extension OptionMenuViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDelegate {
     
+    func homeManagerDidUpdateHomes(_ manager: HMHomeManager) {
+        let home = homeManager.homes.first(where: { $0.name == homeName })
+        if(home == nil) {
+            createHome()
+            return
+        }
+        
+        self.home = home!
+        print("Found home : \(self.home!)")
+        
+        let room = self.home.rooms.first(where: { $0.name == roomName})
+        if room == nil {
+            createRoom()
+            return
+        }
+        self.room = room
+        print("Found room: \(self.room!)")
+        findHomeWithLightBulbAccessory()
+    }
+    
     func createHome(){
         homeManager.addHome(withName: homeName){ (home: HMHome!, error: Error!) in
             if error != nil {
@@ -82,8 +102,7 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
                 return
             }
             
-            let strongSelf = self
-            strongSelf.home = home
+            self.home = home
             print("Successfully added the home")
             print("Creating the room...")
             self.createRoom()
@@ -96,44 +115,39 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
                 print("Failed to create the room...")
                 return
             }
-            let strongSelf = self
-            strongSelf.room = room
+            self.room = room
             
             print("Successfully created a room.")
             print("Discovering accessories now...")
-            strongSelf.accessoryBrowser.startSearchingForNewAccessories()
-            strongSelf.findHomeWithLightBulbAccessory()
+            //self.accessoryBrowser.startSearchingForNewAccessories() // to delete
+            self.findHomeWithLightBulbAccessory()
         }
-    }
-    
-    func homeManagerDidUpdateHomes(_ manager: HMHomeManager) {
-        if let home = homeManager.homes.first(where: { $0.name == homeName }){
-            self.home = home
-            findHomeWithLightBulbAccessory()
-            return
-        }
-        createHome()
     }
     
     func findHomeWithLightBulbAccessory() {
-        if let accessory = accessories.first(where: { $0.name == accessoryName }) {
-            print("Found the projector accessory in the room")
+        if let accessory = room.accessories.first(where: { $0.name == accessoryName }) {
+            print("Found the lightbulb accessory in the room")
             self.accessory = accessory
-            //lowerBrightnessOfProjector()
+            lowerBrightnessOfLightbulb() // to uncomment and modify
             return
         }
         
-        print("Could not find the projector accessory in the room")
+        print("Could not find the lighbulb accessory in the room")
         print("Starting to search for all available accessories")
         accessoryBrowser.startSearchingForNewAccessories()
     }
     
     func accessoryBrowser(_ browser: HMAccessoryBrowser, didFindNewAccessory accessory: HMAccessory) {
-        print("Found a new accessory \(accessory)")
-        print("Adding it to the home...")
+        print("Found an accessory \(accessory)")
         
+        if(accessory.name != accessoryName) {
+            print("The accessory is not a '\(accessoryName)'")
+            print("The accessory will not be added to the home")
+            return
+        }
+        
+        print("Adding it to the home...")
         home.addAccessory(accessory){(error: Error!) in
-            let strongSelf = self
             if error != nil {
                 print("Failed to add the accessory to the home")
                 print("Error = \(String(describing: error))")
@@ -141,18 +155,79 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
             }
             
             print("Successfully added the accessory to the home")
-            print("Assigning the accessory to the room...")
+            print("Assigning the lightbulb to the room...")
             
-            strongSelf.home.assignAccessory(accessory, to: strongSelf.room) {(error: Error!) in
+            self.home.assignAccessory(accessory, to: self.room){ (error) in
                 if error != nil{
                     print("Failed to assign the accessory to the room")
                     print("Error = \(String(describing: error))")
                     return
                 }
-                print("Successfully assigned the accessory to the room")
-                strongSelf.findServicesForAccessory(accessory: accessory)
+                self.accessory = accessory
+                print("Successfully assigned the lightbulb to the room")
+                //self.findServicesForAccessory(accessory: accessory) // to delete
+                self.lowerBrightnessOfLightbulb()
             }
         }
+    }
+    
+    func lowerBrightnessOfLightbulb(){
+        var brightnessCharacteristic: HMCharacteristic!
+        print("Finding the brightness characteristic of the lightbulb...")
+        
+        for service in accessory.services as [HMService]{
+            print(service)
+            for characteristic in service.characteristics as [HMCharacteristic]{
+                if characteristic.characteristicType == HMCharacteristicTypeBrightness{
+                    print("Found it")
+                    brightnessCharacteristic = characteristic
+                }
+            }
+        }
+
+        if brightnessCharacteristic == nil{
+            print("Cannot find it")
+            return
+        }
+        
+        if brightnessCharacteristic.isReadable() == false {
+            print("Cannot read the value of the brightness characteristic")
+            return
+        }
+
+        print("Reading the value of the brightness characteristic...")
+
+        brightnessCharacteristic.readValue {(error: Error!) in
+            if error != nil{
+                print("Cannot read the brightness value")
+                return
+            }
+                
+            print("Read the brightness value. Setting it now...")
+            if !brightnessCharacteristic.isWritable(){
+                print("The brightness characteristic is not writable")
+                return
+            }
+            
+            let newValue = (brightnessCharacteristic.value as! Float) - 1.0
+            
+            brightnessCharacteristic.writeValue(newValue) {(error: Error!) in
+                if error != nil{
+                    print("Failed to set the brightness value")
+                    return
+                }
+                print("Successfully set the brightness value")
+            }
+        }
+
+        if brightnessCharacteristic.value is Float{
+
+        } else {
+          print("The value of the brightness is not Float. Cannot set it")
+        }
+
+      
+
     }
     
     func findServicesForAccessory(accessory: HMAccessory){
