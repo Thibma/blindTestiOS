@@ -21,17 +21,17 @@ class OptionMenuViewController: UIViewController {
     var accessories = [HMAccessory]()
     var home: HMHome!
     var room: HMRoom!
+    var accessory = HMAccessory()
     
     lazy var accessoryBrowser: HMAccessoryBrowser = {
       let browser = HMAccessoryBrowser()
       browser.delegate = self
       return browser
-      }()
-    var randomHomeName: String = {
-      return "Home \(arc4random_uniform(UInt32.max))"
-      }()
-
-    let roomName = "Bedroom 1"
+    }()
+    
+    var homeName = "Main Home"
+    let roomName = "Main Room"
+    let accessoryName = "LightBulb"
 
     var homeManager: HMHomeManager!
     
@@ -75,9 +75,8 @@ extension OptionMenuViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDelegate {
     
-    func homeManagerDidUpdateHomes(_ manager: HMHomeManager) {
-        manager.addHome(withName: randomHomeName){ (home: HMHome!, error: Error!) in
-
+    func createHome(){
+        homeManager.addHome(withName: homeName){ (home: HMHome!, error: Error!) in
             if error != nil {
                 print("Could not add the home")
                 return
@@ -85,20 +84,48 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
             
             let strongSelf = self
             strongSelf.home = home
-            print("Successfully added a home")
-            print("Adding a room to the home...")
-            
-            home.addRoom(withName: strongSelf.roomName){ (room: HMRoom!, error: Error!) in
-                if error != nil {
-                    print("Failed to add a room...")
-                    return
-                }
-                strongSelf.room = room
-                print("Successfully added a room.")
-                print("Discovering accessories now...")
-                strongSelf.accessoryBrowser.startSearchingForNewAccessories()
-            }
+            print("Successfully added the home")
+            print("Creating the room...")
+            self.createRoom()
         }
+    }
+    
+    func createRoom(){
+        home.addRoom(withName: roomName){ (room: HMRoom!, error: Error!) in
+            if error != nil {
+                print("Failed to create the room...")
+                return
+            }
+            let strongSelf = self
+            strongSelf.room = room
+            
+            print("Successfully created a room.")
+            print("Discovering accessories now...")
+            strongSelf.accessoryBrowser.startSearchingForNewAccessories()
+            strongSelf.findHomeWithLightBulbAccessory()
+        }
+    }
+    
+    func homeManagerDidUpdateHomes(_ manager: HMHomeManager) {
+        if let home = homeManager.homes.first(where: { $0.name == homeName }){
+            self.home = home
+            findHomeWithLightBulbAccessory()
+            return
+        }
+        createHome()
+    }
+    
+    func findHomeWithLightBulbAccessory() {
+        if let accessory = accessories.first(where: { $0.name == accessoryName }) {
+            print("Found the projector accessory in the room")
+            self.accessory = accessory
+            //lowerBrightnessOfProjector()
+            return
+        }
+        
+        print("Could not find the projector accessory in the room")
+        print("Starting to search for all available accessories")
+        accessoryBrowser.startSearchingForNewAccessories()
     }
     
     func accessoryBrowser(_ browser: HMAccessoryBrowser, didFindNewAccessory accessory: HMAccessory) {

@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../blindTestiOS/fonts">
-   </FileRef>
-   <FileRef
-      location = "group:/Volumes/Giga_SSD/Documents/ESGI/4MOC/iOS/Projet iOS/blindTestiOS/blindTestiOS/fonts">
-   </FileRef>
-   <FileRef
       location = "self:">
    </FileRef>
 </Workspace>
