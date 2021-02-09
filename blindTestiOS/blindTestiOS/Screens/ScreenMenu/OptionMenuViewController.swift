@@ -199,7 +199,7 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
 
         brightnessCharacteristic.readValue {(error: Error!) in
             if error != nil{
-                print("Cannot read the brightness value")
+                print("Cannot read the brightness value : \(String(describing: error))")
                 return
             }
                 
@@ -220,14 +220,9 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
             }
         }
 
-        if brightnessCharacteristic.value is Float{
-
-        } else {
+        if !(brightnessCharacteristic.value is Float){
           print("The value of the brightness is not Float. Cannot set it")
         }
-
-      
-
     }
     
     func findServicesForAccessory(accessory: HMAccessory){
