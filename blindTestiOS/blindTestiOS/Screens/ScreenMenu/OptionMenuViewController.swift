@@ -125,7 +125,7 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
     }
     
     func findHomeWithLightBulbAccessory() {
-        if let accessory = room.accessories.first(where: { $0.name == accessoryName && $0.isReachable }) {
+        if let accessory = room.accessories.first(where: { $0.name == accessoryName }) {
             print("Found the lightbulb accessory in the room")
             self.accessory = accessory
             lowerBrightnessOfLightbulb() // to uncomment and modify
@@ -172,8 +172,6 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
     }
     
     func lowerBrightnessOfLightbulb(){
-        accessoryBrowser.stopSearchingForNewAccessories() // <= will have to be moved when searching for all accessories
-        
         var brightnessCharacteristic: HMCharacteristic!
         print("Finding the brightness characteristic of the lightbulb...")
         
@@ -182,8 +180,6 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
             for characteristic in service.characteristics as [HMCharacteristic]{
                 if characteristic.characteristicType == HMCharacteristicTypeBrightness{
                     print("Found it")
-                    print(characteristic.value as Any)
-                    characteristic.enableNotification(true){ _ in }
                     brightnessCharacteristic = characteristic
                 }
             }
@@ -207,20 +203,20 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
                 return
             }
                 
-            print("Read the brightness value : \(String(describing: brightnessCharacteristic.value)). Setting it now...")
+            print("Read the brightness value. Setting it now...")
             if !brightnessCharacteristic.isWritable(){
                 print("The brightness characteristic is not writable")
                 return
             }
             
-            let newValue = (brightnessCharacteristic.value as! Float) - 10
+            let newValue = (brightnessCharacteristic.value as! Float) - 1.0
             
             brightnessCharacteristic.writeValue(newValue) {(error: Error!) in
                 if error != nil{
                     print("Failed to set the brightness value")
                     return
                 }
-                print("Successfully set the brightness value to \(newValue)")
+                print("Successfully set the brightness value")
             }
         }
 
