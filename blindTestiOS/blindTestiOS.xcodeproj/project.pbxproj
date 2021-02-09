@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22D3B6CB25D251A700664EB7 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D3B6CA25D251A700664EB7 /* HomeKit.framework */; };
+		22D3B6D425D254F100664EB7 /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D3B6D325D254F100664EB7 /* HomeStore.swift */; };
 		930A8ABF25B1B01B001D91CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930A8ABE25B1B01B001D91CF /* AppDelegate.swift */; };
 		930A8AC825B1B01C001D91CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930A8AC725B1B01C001D91CF /* Assets.xcassets */; };
 		930A8AD625B1B01C001D91CF /* blindTestiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930A8AD525B1B01C001D91CF /* blindTestiOSTests.swift */; };
@@ -77,6 +79,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		22D3B6CA25D251A700664EB7 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
+		22D3B6CF25D2531B00664EB7 /* blindTestiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = blindTestiOS.entitlements; sourceTree = "<group>"; };
+		22D3B6D325D254F100664EB7 /* HomeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStore.swift; sourceTree = "<group>"; };
 		930A8ABB25B1B01B001D91CF /* blindTestiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = blindTestiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		930A8ABE25B1B01B001D91CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		930A8AC725B1B01C001D91CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -140,6 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22D3B6CB25D251A700664EB7 /* HomeKit.framework in Frameworks */,
 				930A8B0525B1DE29001D91CF /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,6 +192,7 @@
 		930A8ABD25B1B01B001D91CF /* blindTestiOS */ = {
 			isa = PBXGroup;
 			children = (
+				22D3B6CF25D2531B00664EB7 /* blindTestiOS.entitlements */,
 				9366E07025BB58BE0043DEE0 /* Services */,
 				9366E06F25BB58B50043DEE0 /* Models */,
 				93AC011E25B8C041009F29CF /* Extensions */,
@@ -194,6 +201,7 @@
 				930A8ABE25B1B01B001D91CF /* AppDelegate.swift */,
 				930A8AC725B1B01C001D91CF /* Assets.xcassets */,
 				930A8ACC25B1B01C001D91CF /* Info.plist */,
+				22D3B6D325D254F100664EB7 /* HomeStore.swift */,
 			);
 			path = blindTestiOS;
 			sourceTree = "<group>";
@@ -219,6 +227,7 @@
 		930A8B0325B1DE29001D91CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22D3B6CA25D251A700664EB7 /* HomeKit.framework */,
 				930A8B0425B1DE29001D91CF /* GameKit.framework */,
 			);
 			name = Frameworks;
@@ -523,6 +532,7 @@
 				93BA3C4325C9A639001520D2 /* GameplayFactory.swift in Sources */,
 				93AC011225B8BB22009F29CF /* SignUpViewController.swift in Sources */,
 				93F16C0A25CC8B43007DB346 /* DetailWebServices.swift in Sources */,
+				22D3B6D425D254F100664EB7 /* HomeStore.swift in Sources */,
 				93AC012025B8C059009F29CF /* UiViewController.swift in Sources */,
 				93F16BDF25CC62D5007DB346 /* TimerCircle.swift in Sources */,
 				930A8AFA25B1B1A4001D91CF /* WelcomeViewController.swift in Sources */,
@@ -684,7 +694,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = blindTestiOS/blindTestiOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B7LLQM9V59;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = blindTestiOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -704,7 +714,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = blindTestiOS/blindTestiOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B7LLQM9V59;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = blindTestiOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

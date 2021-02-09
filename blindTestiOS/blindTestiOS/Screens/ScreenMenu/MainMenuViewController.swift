@@ -60,6 +60,8 @@ class MainMenuViewController: UIViewController {
     @IBAction func scoresTouchButton(_ sender: Any) {
     }
     @IBAction func optionTouchButton(_ sender: Any) {
+        let viewController = OptionMenuViewController.newInstance()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     @IBAction func deconnexionTouchPushButton(_ sender: Any) {
         UserDefaults.standard.removeObject(forKey: "idUser")
