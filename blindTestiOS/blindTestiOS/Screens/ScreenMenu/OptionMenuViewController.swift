@@ -123,8 +123,32 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
                     return
                 }
                 print("Successfully assigned the accessory to the room")
-                //strongSelf.findServicesForAccessory(accessory)
+                strongSelf.findServicesForAccessory(accessory: accessory)
             }
         }
     }
+    
+    func findServicesForAccessory(accessory: HMAccessory){
+        print("Finding services for this accessory...")
+        for service in accessory.services as [HMService]{
+            print(" Service name = \(service.name)")
+            print(" Service type = \(service.serviceType)")
+
+            print(" Finding the characteristics for this service...")
+            findCharacteristicsOfService(service: service)
+      }
+    }
+    
+    func findCharacteristicsOfService(service: HMService){
+      for characteristic in service.characteristics as [HMCharacteristic]{
+        print("   Characteristic type = " +
+          "\(characteristic.characteristicType)")
+      }
+    }
+    
+    func accessoryBrowser(_ browser: HMAccessoryBrowser, didRemoveNewAccessory accessory: HMAccessory){
+        print("An accessory has been removed")
+
+    }
+    
 }
