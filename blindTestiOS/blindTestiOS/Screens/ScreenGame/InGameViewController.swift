@@ -477,7 +477,7 @@ extension InGameViewController: HMHomeManagerDelegate, HMAccessoryDelegate {
                 if characteristic.characteristicType != HMCharacteristicTypeHue || !characteristic.isReadable() { continue }
                 
                 characteristic.readValue {(error: Error!) in
-                    if error != nil || characteristic.value == hue { return }
+                    if error != nil || characteristic.value as! CGFloat == hue { return }
                     if !characteristic.isWritable() { return }
                                 
                     characteristic.writeValue(hue) {(error: Error!) in
