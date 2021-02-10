@@ -50,6 +50,16 @@ class InGameViewController: UIViewController {
         static var middle: UIColor = UIColor.systemOrange
         static var end: UIColor = UIColor.systemRed
     }
+    
+    struct Hues {
+        static var start: CGFloat = 110
+        static var middle: CGFloat = 0
+        static var end: CGFloat = 360
+    }
+    
+    var accessories: [HMAccessory] = []
+    let homeName: String = { HomeStore.shared.homeName }()
+    let roomName: String = { HomeStore.shared.roomName }()
 
     class func newInstance(gameplay: Gameplay, theme: Theme, musicInGame: [Music]!, detailInGame: [Detail]!) -> InGameViewController {
         let viewController = InGameViewController()
@@ -72,47 +82,11 @@ class InGameViewController: UIViewController {
         self.waitBeginGame()
         preparationMusic()
         
-        // appel à homeKit
-        
+        HomeStore.shared.homeManager.delegate = self
+        self.findAccessories()
     }
     
-    func convertColorToHue(color: UIColor) -> CGFloat {
-        var hue: CGFloat? = nil
-        
-        var red: UnsafeMutablePointer<CGFloat>? = nil
-        var green: UnsafeMutablePointer<CGFloat>? = nil
-        var blue: UnsafeMutablePointer<CGFloat>? = nil
-        var alpha: UnsafeMutablePointer<CGFloat>? = nil
-        
-        let convert = color.getRed(red, green: green, blue: blue, alpha: alpha)
-        if(convert) {
-            print("Erreur convert")
-        }
-        
-        if(red == nil || green == nil || blue == nil){
-            print("is null")
-            return 0
-        }
-        
-        let minRGB = min(red!.hashValue, min(green!.hashValue, blue.hashValue))
-        let maxRGB = max(red!.hashValue, max(green!.hashValue, blue.hashValue))
-        
-        if(minRGB == maxRGB) {
-            print("hue = 0")
-            return 0
-        }
-        
-        let d = (red?.hashValue == minRGB) ? green!.hashValue - blue.hashValue : ((blue.hashValue == minRGB) ? red!.hashValue - green!.hashValue : blue.hashValue - red!.hashValue)
-        let h = (red?.hashValue == minRGB) ? 3 : ((blue?.hashValue == minRGB) ? 1 : 5);
-        hue = CGFloat((h - d / (maxRGB - minRGB))) / 6.0
-        print("hue = \(String(describing: hue))")
-        return hue!
-    }
-    
-    func updateAccessoryColor(color: UIColor){
-        let hue = convertColorToHue(color: color)
-        
-    }
+
     
     func preparationMusic() {
         let urlstring = "https://api-4moc-blindtest.herokuapp.com/song/file/" + musicInGame[currentMusic].urlMusic + "?token=JbQzTPdnbMrsN9bwEsQCbRDvZmCRukKJcEQAhxusagUst"
@@ -346,7 +320,7 @@ class InGameViewController: UIViewController {
     
     func startTimer() {
         timer.startTimer(color: Colors.start)
-        updateAccessoryColor(color: Colors.start)
+        updateAccessoriesColor(hue: Hues.start)
         timer.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
     
@@ -369,11 +343,11 @@ class InGameViewController: UIViewController {
     @objc func updateTime() {
         if timer.timeLeft / timer.timeTotal < 0.3 {
             timer.timeLeftShapeLayer.strokeColor = Colors.end.cgColor
-            updateAccessoryColor(color: Colors.end)
+            updateAccessoriesColor(hue: Hues.end)
         }
         else if timer.timeLeft / timer.timeTotal < 0.6 {
             timer.timeLeftShapeLayer.strokeColor = Colors.middle.cgColor
-            updateAccessoryColor(color: Colors.middle)
+            updateAccessoriesColor(hue: Hues.middle)
 
         }
         if timer.timeLeft > 0 {
@@ -432,4 +406,69 @@ extension InGameViewController: PauseViewControllerDelegate {
         player.play()
     }
     
+}
+
+extension InGameViewController: HMHomeManagerDelegate, HMAccessoryBrowserDelegate {
+    
+    func updateAccessoryColor(accessory: HMAccessory, hue: CGFloat){
+        print("Finding the hue characteristic of the accessory...")
+        
+        for service in accessory.services as [HMService]{
+            for characteristic in service.characteristics as [HMCharacteristic]{
+                if characteristic.characteristicType != HMCharacteristicTypeHue && !characteristic.isReadable() {
+                    continue
+                }
+                
+                print("Reading the value of the hue characteristic...")
+
+                characteristic.readValue {(error: Error!) in
+                    if error != nil{
+                        print("Cannot read the hue value : \(String(describing: error))")
+                        return
+                    }
+                        
+                    print("Read the hue value. Setting it now...")
+                    if !characteristic.isWritable(){
+                        print("The brightness characteristic is not writable")
+                        return
+                    }
+                                
+                    characteristic.writeValue(hue) {(error: Error!) in
+                        if error != nil{
+                            print("Failed to set the hue value")
+                            return
+                        }
+                        print("Successfully set the hue value")
+                    }
+                }
+                
+            }
+        }
+    }
+    
+    func updateAccessoriesColor(hue: CGFloat){
+        for accessory in accessories {
+            self.updateAccessoryColor(accessory: accessory, hue: hue)
+        }
+    }
+    
+    func findAccessories() {
+        let room = HomeStore.shared.homeManager.primaryHome?.rooms.first(where: { $0.name == roomName})
+        if(room == nil) {
+            print("no room found")
+            return
+        }
+        
+        let accessories = room?.accessories.filter({ (accessory: HMAccessory) in
+            return accessory.isReachable && nil != accessory.services.first(where: { (service: HMService) in
+                return nil != service.characteristics.first(where: { (characteristic: HMCharacteristic) in
+                    return characteristic.characteristicType == HMCharacteristicTypeHue
+                })
+            })
+        })
+        guard (accessories != nil) else {
+            print("no accessories found")
+        }
+        self.accessories = accessories!
+    }
 }
