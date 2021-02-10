@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import HomeKit
 
 class InGameViewController: UIViewController {
     
@@ -44,6 +45,12 @@ class InGameViewController: UIViewController {
     var timer: TimerCircle = TimerCircle(timeTotal: 10.0)
     var score = 0
 
+    struct Colors {
+        static var start: UIColor = UIColor.systemGreen
+        static var middle: UIColor = UIColor.systemOrange
+        static var end: UIColor = UIColor.systemRed
+    }
+
     class func newInstance(gameplay: Gameplay, theme: Theme, musicInGame: [Music]!, detailInGame: [Detail]!) -> InGameViewController {
         let viewController = InGameViewController()
         viewController.gameplay = gameplay
@@ -64,6 +71,46 @@ class InGameViewController: UIViewController {
         
         self.waitBeginGame()
         preparationMusic()
+        
+        // appel à homeKit
+        
+    }
+    
+    func convertColorToHue(color: UIColor) -> CGFloat {
+        var hue: CGFloat? = nil
+        
+        var red: UnsafeMutablePointer<CGFloat>? = nil
+        var green: UnsafeMutablePointer<CGFloat>? = nil
+        var blue: UnsafeMutablePointer<CGFloat>? = nil
+        var alpha: UnsafeMutablePointer<CGFloat>? = nil
+        
+        let convert = color.getRed(red, green: green, blue: blue, alpha: alpha)
+        if(convert) {
+            print("Erreur convert")
+        }
+        
+        if(red == nil || green == nil || blue == nil){
+            print("is null")
+            return 0
+        }
+        
+        let minRGB = min(red!.hashValue, min(green!.hashValue, blue.hashValue))
+        let maxRGB = max(red!.hashValue, max(green!.hashValue, blue.hashValue))
+        
+        if(minRGB == maxRGB) {
+            print("hue = 0")
+            return 0
+        }
+        
+        let d = (red?.hashValue == minRGB) ? green!.hashValue - blue.hashValue : ((blue.hashValue == minRGB) ? red!.hashValue - green!.hashValue : blue.hashValue - red!.hashValue)
+        let h = (red?.hashValue == minRGB) ? 3 : ((blue?.hashValue == minRGB) ? 1 : 5);
+        hue = CGFloat((h - d / (maxRGB - minRGB))) / 6.0
+        print("hue = \(String(describing: hue))")
+        return hue!
+    }
+    
+    func updateAccessoryColor(color: UIColor){
+        let hue = convertColorToHue(color: color)
         
     }
     
@@ -298,7 +345,8 @@ class InGameViewController: UIViewController {
     }
     
     func startTimer() {
-        timer.startTimer()
+        timer.startTimer(color: Colors.start)
+        updateAccessoryColor(color: Colors.start)
         timer.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
     
@@ -320,10 +368,13 @@ class InGameViewController: UIViewController {
     
     @objc func updateTime() {
         if timer.timeLeft / timer.timeTotal < 0.3 {
-            timer.timeLeftShapeLayer.strokeColor = UIColor.systemRed.cgColor
+            timer.timeLeftShapeLayer.strokeColor = Colors.end.cgColor
+            updateAccessoryColor(color: Colors.end)
         }
         else if timer.timeLeft / timer.timeTotal < 0.6 {
-            timer.timeLeftShapeLayer.strokeColor = UIColor.systemOrange.cgColor
+            timer.timeLeftShapeLayer.strokeColor = Colors.middle.cgColor
+            updateAccessoryColor(color: Colors.middle)
+
         }
         if timer.timeLeft > 0 {
             timer.timeLeft = timer.endTime?.timeIntervalSinceNow ?? 0

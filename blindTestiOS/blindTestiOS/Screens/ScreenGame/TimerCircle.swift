@@ -38,10 +38,10 @@ class TimerCircle {
         uiView.addSubview(timeLabel)
     }
     
-    func startAnimation() {
+    func startAnimation(color: UIColor) {
         timeLeftShapeLayer.path = UIBezierPath(arcCenter: CGPoint(x: -30 , y: 30), radius:
             25, startAngle: -90.degreesToRadians, endAngle: 270.degreesToRadians, clockwise: true).cgPath
-        timeLeftShapeLayer.strokeColor = UIColor.systemGreen.cgColor
+        timeLeftShapeLayer.strokeColor = color.cgColor
         timeLeftShapeLayer.fillColor = UIColor.clear.cgColor
         timeLeftShapeLayer.lineWidth = 5
         uiView.layer.addSublayer(timeLeftShapeLayer)
@@ -51,8 +51,8 @@ class TimerCircle {
         uiView.removeFromSuperview()
     }
     
-    func startTimer() {
-        startAnimation()
+    func startTimer(color: UIColor) {
+        startAnimation(color: color)
         strokeIt.fromValue = 0
         strokeIt.toValue = 1
         strokeIt.duration = timeLeft
