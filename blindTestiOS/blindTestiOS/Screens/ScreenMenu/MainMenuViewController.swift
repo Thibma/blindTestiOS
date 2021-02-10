@@ -71,7 +71,7 @@ class MainMenuViewController: UIViewController {
         var error: NSError?
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error){
             if(error != nil){
-                print("Identification impossible")
+                showMessage(message: "Identification impossible")
                 return
             }
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason ) { success, error in
@@ -81,11 +81,32 @@ class MainMenuViewController: UIViewController {
                         self.navigationController?.pushViewController(viewController, animated: true)
                     }
                 } else {
-                    print(error?.localizedDescription ?? "Failed to authenticate")
+                    self.showMessage(message: error?.localizedDescription ?? "Failed to authenticate")
                 }
             }
         }
-
+        
+        else if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error){
+            if(error != nil){
+                showMessage(message: "Identification impossible")
+                return
+            }
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
+                if success {
+                    DispatchQueue.main.async { [unowned self] in
+                        let viewController = OptionMenuViewController.newInstance()
+                        self.navigationController?.pushViewController(viewController, animated: true)
+                    }
+                } else {
+                    self.showMessage(message: error?.localizedDescription ?? "Failed to authenticate")
+                }
+            }
+        }
+        
+        else {
+            let viewController = OptionMenuViewController.newInstance()
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
     
     @IBAction func deconnexionTouchPushButton(_ sender: Any) {

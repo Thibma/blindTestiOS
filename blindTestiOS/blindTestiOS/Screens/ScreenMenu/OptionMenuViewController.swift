@@ -55,13 +55,13 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
     func createHome(){
         HomeStore.shared.homeManager.addHome(withName: homeName){ (home: HMHome!, error: Error!) in
             if error != nil {
-                print("Could not add the home")
+                self.showMessage(message: "Could not add the home")
                 return
             }
             
             HomeStore.shared.homeManager.updatePrimaryHome(home) { (error: Error!) in
                 if(error != nil) {
-                    print("Could not define primaryhome")
+                    self.showMessage(message: "Could not define primery home")
                     return
                 }
                 self.createRoom()
@@ -73,7 +73,7 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
     func createRoom(){
         HomeStore.shared.homeManager.primaryHome?.addRoom(withName: roomName){ (room: HMRoom!, error: Error!) in
             if error != nil {
-                print("Failed to create the room...")
+                self.showMessage(message: "Failed to create the room...")
                 return
             }
             
@@ -84,33 +84,55 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
     func findHomeWithLightBulbAccessory() {
         guard let room: HMRoom = HomeStore.shared.homeManager.primaryHome?.getRoom() else { return }
         let accessories: [HMAccessory] = room.getAccessories()
-        //if(accessories.count == 0){
-            HomeStore.shared.accessoryBrowser.startSearchingForNewAccessories()
-        //}
+        print(accessories)
+        if(accessories.count == 0){
+            
+        }
+        HomeStore.shared.accessoryBrowser.startSearchingForNewAccessories()
     }
     
     func accessoryBrowser(_ browser: HMAccessoryBrowser, didFindNewAccessory accessory: HMAccessory) {
-        print(accessory)
+       
         let isOK: Bool = nil != accessory.services.first(where: { (service: HMService) in
             return nil != service.characteristics.first(where: { (characteritic: HMCharacteristic) in
                 return characteritic.characteristicType == HMCharacteristicTypeHue
             })
         })
-        if(!isOK) { return }
+        print(" - accessory :\(accessory)    isOK: \(accessory.hasHue())")
+        findServicesForAccessory(accessory: accessory)
+        if(!accessory.hasHue()) { return }
   
         HomeStore.shared.homeManager.primaryHome?.addAccessory(accessory){(error: Error!) in
             if error != nil {
-                print("Failed to add the accessory to the home")
+                self.showMessage(message: "Failed to add the accessory to the home")
                 return
             }
             
             guard let room: HMRoom = HomeStore.shared.homeManager.primaryHome?.getRoom() else { return }
             HomeStore.shared.homeManager.primaryHome?.assignAccessory(accessory, to:room){ (error) in
                 if error != nil{
-                    print("Failed to assign the accessory to the room")
+                    self.showMessage(message: "Failed to assign the accessory to the room")
                     return
                 }
             }
         }
     }
+    
+    func findServicesForAccessory(accessory: HMAccessory){
+            print("Finding services for this accessory...")
+            for service in accessory.services as [HMService]{
+                print(" Service name = \(service.name)")
+                print(" Service type = \(service.serviceType)")
+
+                print(" Finding the characteristics for this service...")
+                findCharacteristicsOfService(service: service)
+          }
+        }
+        
+        func findCharacteristicsOfService(service: HMService){
+          for characteristic in service.characteristics as [HMCharacteristic]{
+            print("   Characteristic type = " +
+              "\(characteristic.characteristicType)")
+          }
+        }
 }

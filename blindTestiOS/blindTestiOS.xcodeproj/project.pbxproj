@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		220F8A7D25D2D4440073DDD5 /* HMCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220F8A7C25D2D4440073DDD5 /* HMCharacteristic.swift */; };
+		2223939B25D470820025C1D4 /* blindTestiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930A8AD525B1B01C001D91CF /* blindTestiOSTests.swift */; };
+		222393A325D47B920025C1D4 /* HMAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222393A225D47B920025C1D4 /* HMAccessory.swift */; };
 		227CF69925D42D9000023EF1 /* HMHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227CF69825D42D9000023EF1 /* HMHome.swift */; };
 		227CF69E25D4314A00023EF1 /* HMRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227CF69D25D4314A00023EF1 /* HMRoom.swift */; };
 		22D3B6CB25D251A700664EB7 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D3B6CA25D251A700664EB7 /* HomeKit.framework */; };
 		22D3B6D425D254F100664EB7 /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D3B6D325D254F100664EB7 /* HomeStore.swift */; };
 		930A8ABF25B1B01B001D91CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930A8ABE25B1B01B001D91CF /* AppDelegate.swift */; };
 		930A8AC825B1B01C001D91CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930A8AC725B1B01C001D91CF /* Assets.xcassets */; };
-		930A8AD625B1B01C001D91CF /* blindTestiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930A8AD525B1B01C001D91CF /* blindTestiOSTests.swift */; };
 		930A8AE125B1B01C001D91CF /* blindTestiOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930A8AE025B1B01C001D91CF /* blindTestiOSUITests.swift */; };
 		930A8AFA25B1B1A4001D91CF /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930A8AF825B1B1A4001D91CF /* WelcomeViewController.swift */; };
 		930A8AFB25B1B1A4001D91CF /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 930A8AF925B1B1A4001D91CF /* WelcomeViewController.xib */; };
@@ -101,6 +102,7 @@
 
 /* Begin PBXFileReference section */
 		220F8A7C25D2D4440073DDD5 /* HMCharacteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMCharacteristic.swift; sourceTree = "<group>"; };
+		222393A225D47B920025C1D4 /* HMAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMAccessory.swift; sourceTree = "<group>"; };
 		227CF69825D42D9000023EF1 /* HMHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMHome.swift; sourceTree = "<group>"; };
 		227CF69D25D4314A00023EF1 /* HMRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMRoom.swift; sourceTree = "<group>"; };
 		22D3B6CA25D251A700664EB7 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
@@ -416,6 +418,7 @@
 				220F8A7C25D2D4440073DDD5 /* HMCharacteristic.swift */,
 				227CF69825D42D9000023EF1 /* HMHome.swift */,
 				227CF69D25D4314A00023EF1 /* HMRoom.swift */,
+				222393A225D47B920025C1D4 /* HMAccessory.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -626,6 +629,7 @@
 				93F16BFB25CC7C98007DB346 /* SongWebServices.swift in Sources */,
 				9366E07225BB58D20043DEE0 /* User.swift in Sources */,
 				93C0E89A25D3E77900731C6F /* RecordTableViewCell.swift in Sources */,
+				222393A325D47B920025C1D4 /* HMAccessory.swift in Sources */,
 				9365847325BEDEEE002E6CB6 /* API.swift in Sources */,
 				93BA3C3E25C9A2F7001520D2 /* GameplayWebServices.swift in Sources */,
 				937F319125D2DDB300012BA9 /* HistoricViewController.swift in Sources */,
@@ -651,7 +655,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				930A8AD625B1B01C001D91CF /* blindTestiOSTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,6 +663,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				930A8AE125B1B01C001D91CF /* blindTestiOSUITests.swift in Sources */,
+				2223939B25D470820025C1D4 /* blindTestiOSTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

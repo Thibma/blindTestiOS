@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 
 var vSpinner: UIView?
+var alert: UIAlertController?
 
 extension UIViewController {
     
@@ -39,6 +40,20 @@ extension UIViewController {
         DispatchQueue.main.async {
             vSpinner?.removeFromSuperview()
             vSpinner = nil
+        }
+    }
+    
+    func showMessage(message: String) {
+        alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let actionOK = UIAlertAction(title: "OK", style: .default) { _ in }
+        alert?.addAction(actionOK)
+        self.present(alert!, animated: true){}
+    }
+    
+    func removeMessage(){
+        DispatchQueue.main.async{
+            alert?.dismiss(animated: true){}
+            alert = nil
         }
     }
     
