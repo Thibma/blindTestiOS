@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		220F8A7D25D2D4440073DDD5 /* HMCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220F8A7C25D2D4440073DDD5 /* HMCharacteristic.swift */; };
+		227CF69925D42D9000023EF1 /* HMHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227CF69825D42D9000023EF1 /* HMHome.swift */; };
 		22D3B6CB25D251A700664EB7 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D3B6CA25D251A700664EB7 /* HomeKit.framework */; };
 		22D3B6D425D254F100664EB7 /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D3B6D325D254F100664EB7 /* HomeStore.swift */; };
 		930A8ABF25B1B01B001D91CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930A8ABE25B1B01B001D91CF /* AppDelegate.swift */; };
@@ -81,6 +82,7 @@
 
 /* Begin PBXFileReference section */
 		220F8A7C25D2D4440073DDD5 /* HMCharacteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMCharacteristic.swift; sourceTree = "<group>"; };
+		227CF69825D42D9000023EF1 /* HMHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMHome.swift; sourceTree = "<group>"; };
 		22D3B6CA25D251A700664EB7 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
 		22D3B6CF25D2531B00664EB7 /* blindTestiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = blindTestiOS.entitlements; sourceTree = "<group>"; };
 		22D3B6D325D254F100664EB7 /* HomeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStore.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 				93AC011F25B8C059009F29CF /* UiViewController.swift */,
 				937FE0D725BB41AA00527447 /* UITextField.swift */,
 				220F8A7C25D2D4440073DDD5 /* HMCharacteristic.swift */,
+				227CF69825D42D9000023EF1 /* HMHome.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				93AC010825B8BB02009F29CF /* LoginViewController.swift in Sources */,
 				93F16BE725CC69BD007DB346 /* Music.swift in Sources */,
 				93F16BEC25CC69C7007DB346 /* Detail.swift in Sources */,
+				227CF69925D42D9000023EF1 /* HMHome.swift in Sources */,
 				93BA3C0125C97102001520D2 /* PlayMenuViewController.swift in Sources */,
 				93BA3C0F25C97129001520D2 /* OptionMenuViewController.swift in Sources */,
 				93984FE425CDC7C900AD2FF1 /* PauseViewController.swift in Sources */,
