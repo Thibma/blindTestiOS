@@ -20,7 +20,7 @@ class OptionMenuViewController: UIViewController {
     
     //var accessories = [HMAccessory]()
     //var home: HMHome!
-    var room: HMRoom!
+    //var room: HMRoom!
     var accessory = HMAccessory()
     let homeName: String = { HomeStore.shared.homeName }()
     let roomName: String = { HomeStore.shared.roomName }()
@@ -71,7 +71,7 @@ extension OptionMenuViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDelegate {
+extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDelegate, HMHomeDelegate, HMAccessoryDelegate {
     
     func homeManagerDidUpdateHomes(_ manager: HMHomeManager) {
         let home = HomeStore.shared.homeManager.primaryHome
@@ -80,13 +80,12 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
             return
         }
         
-        let room = HomeStore.shared.homeManager.primaryHome?.rooms.first(where: { $0.name == roomName})
-        if room == nil {
+        guard let room: HMRoom = HomeStore.shared.homeManager.primaryHome?.getRoom() else {
             createRoom()
             return
         }
-        self.room = room
-        print("Found room: \(self.room!)")
+
+        print("Found room: \(room)")
         findHomeWithLightBulbAccessory()
     }
     
@@ -116,7 +115,6 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
                 print("Failed to create the room...")
                 return
             }
-            self.room = room
             
             print("Successfully created a room.")
             print("Discovering accessories now...")
@@ -126,6 +124,8 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
     }
     
     func findHomeWithLightBulbAccessory() {
+        guard let room: HMRoom = HomeStore.shared.homeManager.primaryHome?.getRoom() else { return }
+
         if let accessory = room.accessories.first(where: { $0.name == accessoryName && $0.isReachable }) {
             print("Found the lightbulb accessory in the room")
             self.accessory = accessory
@@ -159,7 +159,8 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
             print("Successfully added the accessory to the home")
             print("Assigning the lightbulb to the room...")
             
-            HomeStore.shared.homeManager.primaryHome?.assignAccessory(accessory, to: self.room){ (error) in
+            guard let room: HMRoom = HomeStore.shared.homeManager.primaryHome?.getRoom() else { return }
+            HomeStore.shared.homeManager.primaryHome?.assignAccessory(accessory, to:room){ (error) in
                 if error != nil{
                     print("Failed to assign the accessory to the room")
                     print("Error = \(String(describing: error))")
