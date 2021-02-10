@@ -54,6 +54,7 @@ class OptionMenuViewController: UIViewController {
     }
     
     @IBAction func addBtnAction(_ sender: Any) {
+        
     }
 
 
@@ -125,10 +126,11 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
     }
     
     func findHomeWithLightBulbAccessory() {
-        if let accessory = room.accessories.first(where: { $0.name == accessoryName }) {
+        if let accessory = room.accessories.first(where: { $0.name == accessoryName && $0.isReachable }) {
             print("Found the lightbulb accessory in the room")
             self.accessory = accessory
-            lowerBrightnessOfLightbulb() // to uncomment and modify
+            //lowerBrightnessOfLightbulb()
+            self.changeLightBulbColor(newhue: 360) // rouge
             return
         }
         
@@ -166,7 +168,56 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
                 self.accessory = accessory
                 print("Successfully assigned the lightbulb to the room")
                 //self.findServicesForAccessory(accessory: accessory) // to delete
-                self.lowerBrightnessOfLightbulb()
+                //self.lowerBrightnessOfLightbulb()
+                self.changeLightBulbColor(newhue: 360) // rouge
+            }
+        }
+    }
+    
+    func changeLightBulbColor(newhue: Int){
+        var hueCharacteristic: HMCharacteristic!
+        print("Finding the hue characteristic of the lightbulb...")
+        
+        for service in accessory.services as [HMService]{
+            print(service)
+            for characteristic in service.characteristics as [HMCharacteristic]{
+                if characteristic.characteristicType == HMCharacteristicTypeHue{
+                    print("Found it")
+                    hueCharacteristic = characteristic
+                }
+            }
+        }
+
+        if hueCharacteristic == nil{
+            print("Cannot find it")
+            return
+        }
+        
+        if hueCharacteristic.isReadable() == false {
+            print("Cannot read the value of the hue characteristic")
+            return
+        }
+
+        print("Reading the value of the hue characteristic...")
+
+        hueCharacteristic.readValue {(error: Error!) in
+            if error != nil{
+                print("Cannot read the hue value : \(String(describing: error))")
+                return
+            }
+                
+            print("Read the hue value. Setting it now...")
+            if !hueCharacteristic.isWritable(){
+                print("The brightness characteristic is not writable")
+                return
+            }
+                        
+            hueCharacteristic.writeValue(newhue) {(error: Error!) in
+                if error != nil{
+                    print("Failed to set the hue value")
+                    return
+                }
+                print("Successfully set the hue value")
             }
         }
     }
@@ -218,10 +269,6 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
                 }
                 print("Successfully set the brightness value")
             }
-        }
-
-        if !(brightnessCharacteristic.value is Float){
-          print("The value of the brightness is not Float. Cannot set it")
         }
     }
     
