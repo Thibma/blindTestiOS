@@ -66,7 +66,6 @@ class MainMenuViewController: UIViewController {
         
         context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
             if success {
-                // Move to the main thread because a state update triggers UI changes.
                 DispatchQueue.main.async { [unowned self] in
                     let viewController = OptionMenuViewController.newInstance()
                     self.navigationController?.pushViewController(viewController, animated: true)

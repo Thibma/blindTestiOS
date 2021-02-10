@@ -9,24 +9,12 @@ import UIKit
 import HomeKit
 
 class OptionMenuViewController: UIViewController {
-    @IBOutlet weak var accessoriesTV: UITableView!
     @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var backBtn: UIButton!
     
-    var array: [String] = []
-    enum Identifier: String { case accessories }
-    
-    
-    
-    //var accessories = [HMAccessory]()
-    //var home: HMHome!
-    //var room: HMRoom!
-    var accessory = HMAccessory()
     let homeName: String = { HomeStore.shared.homeName }()
     let roomName: String = { HomeStore.shared.roomName }()
-    
-    let accessoryName = "LightBulb"
-    
+        
     class func newInstance() -> OptionMenuViewController {
         let optionMenuVC = OptionMenuViewController()
         return optionMenuVC
@@ -34,7 +22,9 @@ class OptionMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        addBtn.layer.cornerRadius = 8
+        backBtn.layer.cornerRadius = 8
+        setBackground()
         HomeStore.shared.homeManager.delegate = self
         HomeStore.shared.accessoryBrowser.delegate = self
     }
@@ -44,23 +34,7 @@ class OptionMenuViewController: UIViewController {
     }
     
     @IBAction func addBtnAction(_ sender: Any) {
-        
-    }
-
-
-}
-
-extension OptionMenuViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.array.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let _: String =  self.array[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.accessories.rawValue, for: indexPath) //as! UITableViewCell
-        cell.textLabel?.text = "Test"
-        return cell
+        findHomeWithLightBulbAccessory()
     }
 }
 
@@ -76,8 +50,6 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
             createRoom()
             return
         }
-
-        findHomeWithLightBulbAccessory()
     }
     
     func createHome(){
