@@ -72,7 +72,7 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
             return
         }
 
-        guard let room: HMRoom = HomeStore.shared.homeManager.primaryHome?.getRoom() else {
+        guard let _: HMRoom = HomeStore.shared.homeManager.primaryHome?.getRoom() else {
             createRoom()
             return
         }
@@ -112,12 +112,13 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
     func findHomeWithLightBulbAccessory() {
         guard let room: HMRoom = HomeStore.shared.homeManager.primaryHome?.getRoom() else { return }
         let accessories: [HMAccessory] = room.getAccessories()
-        if(accessories.count == 0){
+        //if(accessories.count == 0){
             HomeStore.shared.accessoryBrowser.startSearchingForNewAccessories()
-        }
+        //}
     }
     
     func accessoryBrowser(_ browser: HMAccessoryBrowser, didFindNewAccessory accessory: HMAccessory) {
+        print(accessory)
         let isOK: Bool = nil != accessory.services.first(where: { (service: HMService) in
             return nil != service.characteristics.first(where: { (characteritic: HMCharacteristic) in
                 return characteritic.characteristicType == HMCharacteristicTypeHue

@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import LocalAuthentication
 
 class MainMenuViewController: UIViewController {
     
@@ -60,9 +61,22 @@ class MainMenuViewController: UIViewController {
     @IBAction func scoresTouchButton(_ sender: Any) {
     }
     @IBAction func optionTouchButton(_ sender: Any) {
-        let viewController = OptionMenuViewController.newInstance()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        let context = LAContext()
+        let reason = "Modifier les paramètres"
+        
+        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
+            if success {
+                // Move to the main thread because a state update triggers UI changes.
+                DispatchQueue.main.async { [unowned self] in
+                    let viewController = OptionMenuViewController.newInstance()
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                }
+            } else {
+                print(error?.localizedDescription ?? "Failed to authenticate")
+            }
+        }
     }
+    
     @IBAction func deconnexionTouchPushButton(_ sender: Any) {
         UserDefaults.standard.removeObject(forKey: "idUser")
         self.navigationController?.pushViewController(WelcomeViewController(), animated: true)
