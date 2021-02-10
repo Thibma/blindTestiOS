@@ -341,14 +341,13 @@ class InGameViewController: UIViewController {
     }
     
     @objc func updateTime() {
-        updateAccessoriesColor(hue: Hues.start - CGFloat(timer.timeLeft - timer.timeLeft))
         if timer.timeLeft / timer.timeTotal < 0.3 {
             timer.timeLeftShapeLayer.strokeColor = Colors.end.cgColor
+            updateAccessoriesColor(hue: Hues.end)
         }
         else if timer.timeLeft / timer.timeTotal < 0.6 {
             timer.timeLeftShapeLayer.strokeColor = Colors.middle.cgColor
-            //updateAccessoriesColor(hue: Hues.middle)
-
+            updateAccessoriesColor(hue: Hues.middle)
         }
         if timer.timeLeft > 0 {
             timer.timeLeft = timer.endTime?.timeIntervalSinceNow ?? 0
@@ -411,8 +410,6 @@ extension InGameViewController: PauseViewControllerDelegate {
 extension InGameViewController: HMHomeManagerDelegate, HMAccessoryDelegate {
     
     func updateAccessoryColor(accessory: HMAccessory, hue: CGFloat){
-        let newhue = hue < 0 ? 360 : hue
-        
         for service in accessory.services as [HMService]{
             for characteristic in service.characteristics as [HMCharacteristic]{
                 if characteristic.characteristicType != HMCharacteristicTypeHue || !characteristic.isReadable() { continue }
@@ -421,7 +418,7 @@ extension InGameViewController: HMHomeManagerDelegate, HMAccessoryDelegate {
                     if error != nil { return }
                     if !characteristic.isWritable() { return  }
                                 
-                    characteristic.writeValue(newhue) {(error: Error!) in
+                    characteristic.writeValue(hue) {(error: Error!) in
                         if error != nil { return }
                     }
                 }
@@ -430,8 +427,9 @@ extension InGameViewController: HMHomeManagerDelegate, HMAccessoryDelegate {
     }
     
     func updateAccessoriesColor(hue: CGFloat){
+        let newhue = hue < 0 ? 360 : hue
         for accessory in accessories {
-            self.updateAccessoryColor(accessory: accessory, hue: hue)
+            self.updateAccessoryColor(accessory: accessory, hue: newhue)
         }
     }
     
@@ -440,7 +438,6 @@ extension InGameViewController: HMHomeManagerDelegate, HMAccessoryDelegate {
             print("no room found")
             return
         }
-
         
         let accessories: [HMAccessory] = room.getAccessories()
         if accessories.count == 0 {
