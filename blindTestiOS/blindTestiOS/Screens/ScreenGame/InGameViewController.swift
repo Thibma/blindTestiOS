@@ -58,8 +58,6 @@ class InGameViewController: UIViewController {
     }
     
     var accessories: [HMAccessory] = []
-    let homeName: String = { HomeStore.shared.homeName }()
-    let roomName: String = { HomeStore.shared.roomName }()
 
     class func newInstance(gameplay: Gameplay, theme: Theme, musicInGame: [Music]!, detailInGame: [Detail]!) -> InGameViewController {
         let viewController = InGameViewController()
@@ -410,7 +408,7 @@ extension InGameViewController: PauseViewControllerDelegate {
     
 }
 
-extension InGameViewController: HMHomeManagerDelegate, HMAccessoryBrowserDelegate {
+extension InGameViewController: HMHomeManagerDelegate, HMAccessoryDelegate, HMHomeDelegate {
     
     func updateAccessoryColor(accessory: HMAccessory, hue: CGFloat){
         print("Finding the hue characteristic of the accessory...")
@@ -455,23 +453,16 @@ extension InGameViewController: HMHomeManagerDelegate, HMAccessoryBrowserDelegat
     }
     
     func findAccessories() {
-        let room = HomeStore.shared.homeManager.primaryHome?.rooms.first(where: { $0.name == roomName})
-        if(room == nil) {
+        guard let room: HMRoom = HomeStore.shared.homeManager.primaryHome?.getRoom() else {
             print("no room found")
             return
         }
+
         
-        let accessories = room?.accessories.filter({ (accessory: HMAccessory) in
-            return accessory.isReachable && nil != accessory.services.first(where: { (service: HMService) in
-                return nil != service.characteristics.first(where: { (characteristic: HMCharacteristic) in
-                    return characteristic.characteristicType == HMCharacteristicTypeHue
-                })
-            })
-        })
-        guard (accessories != nil) else {
+        let accessories: [HMAccessory] = room.getAccessories()
+        if accessories.count == 0 {
             print("no accessories found")
-            return
         }
-        self.accessories = accessories!
+        self.accessories = accessories
     }
 }
