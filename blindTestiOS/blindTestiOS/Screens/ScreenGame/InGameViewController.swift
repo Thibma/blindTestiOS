@@ -79,11 +79,13 @@ class InGameViewController: UIViewController {
         self.response4Button.layer.cornerRadius = 8
         self.pauseButton.layer.cornerRadius = 8
         
+        HomeStore.shared.homeManager.delegate = self
+        self.findAccessories()
+        
         self.waitBeginGame()
         preparationMusic()
         
-        HomeStore.shared.homeManager.delegate = self
-        self.findAccessories()
+
     }
     
 
@@ -415,11 +417,11 @@ extension InGameViewController: HMHomeManagerDelegate, HMAccessoryBrowserDelegat
         
         for service in accessory.services as [HMService]{
             for characteristic in service.characteristics as [HMCharacteristic]{
-                if characteristic.characteristicType != HMCharacteristicTypeHue && !characteristic.isReadable() {
+                if characteristic.characteristicType != HMCharacteristicTypeHue || !characteristic.isReadable() {
                     continue
                 }
                 
-                print("Reading the value of the hue characteristic...")
+                print("Reading the value of the hue characteristic... \(characteristic)")
 
                 characteristic.readValue {(error: Error!) in
                     if error != nil{
@@ -468,6 +470,7 @@ extension InGameViewController: HMHomeManagerDelegate, HMAccessoryBrowserDelegat
         })
         guard (accessories != nil) else {
             print("no accessories found")
+            return
         }
         self.accessories = accessories!
     }
