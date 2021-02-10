@@ -22,6 +22,8 @@ class OptionMenuViewController: UIViewController {
     //var home: HMHome!
     var room: HMRoom!
     var accessory = HMAccessory()
+    let homeName: String = { HomeStore.shared.homeName }()
+    let roomName: String = { HomeStore.shared.roomName }()
     
     lazy var accessoryBrowser: HMAccessoryBrowser = {
       let browser = HMAccessoryBrowser()
@@ -29,8 +31,7 @@ class OptionMenuViewController: UIViewController {
       return browser
     }()
     
-    var homeName = "Main Home"
-    let roomName = "Main Room"
+
     let accessoryName = "LightBulb"
     
     class func newInstance() -> OptionMenuViewController {

@@ -9,6 +9,10 @@ import Foundation
 import HomeKit
 
 class HomeStore: NSObject {
+    
+    let homeName = "Main Home"
+    let roomName = "Main Room"
+    
     /// A singleton that can be used anywhere in the app to access the home manager.
     static var shared = HomeStore()
     
