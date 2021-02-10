@@ -56,10 +56,11 @@ class InGameViewController: UIViewController {
     
     struct Hues {
         static var start: CGFloat = 110
-        static var middle: CGFloat = 0
+        static var middle: CGFloat = 20
         static var end: CGFloat = 360
     }
-    
+    let homeName: String = { HomeStore.shared.homeName }()
+    let roomName: String = { HomeStore.shared.roomName }()
     var accessories: [HMAccessory] = []
 
     class func newInstance(gameplay: Gameplay, theme: Theme, musicInGame: [Music]!, detailInGame: [Detail]!) -> InGameViewController {
@@ -85,12 +86,9 @@ class InGameViewController: UIViewController {
         
         self.waitBeginGame()
         preparationMusic()
-        
-
     }
     
 
-    
     func preparationMusic() {
         let urlstring = "https://api-4moc-blindtest.herokuapp.com/song/file/" + musicInGame[currentMusic].urlMusic + "?token=JbQzTPdnbMrsN9bwEsQCbRDvZmCRukKJcEQAhxusagUst"
         let url = URL(string: urlstring)
@@ -470,11 +468,9 @@ extension InGameViewController: PauseViewControllerDelegate {
         self.resumeTimer()
         player.play()
     }
-    
 }
 
 extension InGameViewController: HMHomeManagerDelegate, HMAccessoryDelegate {
-    
     func updateAccessoryColor(accessory: HMAccessory, hue: CGFloat){
         for service in accessory.services as [HMService]{
             for characteristic in service.characteristics as [HMCharacteristic]{
@@ -482,7 +478,7 @@ extension InGameViewController: HMHomeManagerDelegate, HMAccessoryDelegate {
                 
                 characteristic.readValue {(error: Error!) in
                     if error != nil { return }
-                    if !characteristic.isWritable() { return  }
+                    if !characteristic.isWritable() { return }
                                 
                     characteristic.writeValue(hue) {(error: Error!) in
                         if error != nil { return }
@@ -493,22 +489,19 @@ extension InGameViewController: HMHomeManagerDelegate, HMAccessoryDelegate {
     }
     
     func updateAccessoriesColor(hue: CGFloat){
-        let newhue = hue < 0 ? 360 : hue
         for accessory in accessories {
-            self.updateAccessoryColor(accessory: accessory, hue: newhue)
+            self.updateAccessoryColor(accessory: accessory, hue: hue)
         }
     }
     
     func findAccessories() {
         guard let room: HMRoom = HomeStore.shared.homeManager.primaryHome?.getRoom() else {
-            print("no room found")
             return
         }
         
         let accessories: [HMAccessory] = room.getAccessories()
-        if accessories.count == 0 {
-            print("no accessories found")
-        }
         self.accessories = accessories
     }
 }
+
+

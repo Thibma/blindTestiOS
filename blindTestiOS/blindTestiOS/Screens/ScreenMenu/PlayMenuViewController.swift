@@ -98,8 +98,8 @@ class PlayMenuViewController: UIViewController {
                         let detail = detailCopy[random]
                         detailCopy.remove(at: random)
                         
-                        music.setResponses(musics: musics)
-                        detail.setResponses(details: details)
+                        music.setResponses(musics: musicTheme)
+                        detail.setResponses(details: detailTheme)
                         
                         musicInGame.append(music)
                         detailInGame.append(detail)
