@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 protocol PauseViewControllerDelegate {
     func leaveGame()
@@ -17,6 +18,7 @@ class PauseViewController: UIViewController {
     @IBOutlet weak var resumeButton: UIButton!
     @IBOutlet weak var leaveButton: UIButton!
     
+    var player: AVAudioPlayer!
     var delegate: PauseViewControllerDelegate?
     
     override func viewDidLoad() {
@@ -41,11 +43,13 @@ class PauseViewController: UIViewController {
     }
     
     @IBAction func resumePressButton(_ sender: Any) {
+        player = self.setAudioButton()
         self.delegate?.resumeGame()
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func leavePressButton(_ sender: Any) {
+        player = self.setAudioBackButton()
         self.delegate?.leaveGame()
         self.dismiss(animated: false, completion: nil)
     }

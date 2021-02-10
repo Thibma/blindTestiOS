@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="KGRedHands.ttf">
+            <string>KGRedHands</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="KGk-i7-Jjw" customClass="HistoricTableViewCell" customModule="blindTestiOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="354" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="354" height="100"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8O-zM-8V7">
+                        <rect key="frame" x="5" y="5" width="31.5" height="17.5"/>
+                        <fontDescription key="fontDescription" name="KGRedHands" family="KG Red Hands" pointSize="15"/>
+                        <color key="textColor" name="Secondary"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cE0-7r-UZc">
+                        <rect key="frame" x="287" y="43" width="47" height="21"/>
+                        <fontDescription key="fontDescription" name="KGRedHands" family="KG Red Hands" pointSize="18"/>
+                        <color key="textColor" name="Secondary"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6dm-k1-lXb">
+                        <rect key="frame" x="5" y="32.5" width="100.5" height="42"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mode de jeu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJW-HP-AEv">
+                                <rect key="frame" x="0.0" y="0.0" width="100.5" height="21"/>
+                                <fontDescription key="fontDescription" name="KGRedHands" family="KG Red Hands" pointSize="18"/>
+                                <color key="textColor" name="Primary"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thème" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fq3-YC-Dnl">
+                                <rect key="frame" x="0.0" y="21" width="100.5" height="21"/>
+                                <fontDescription key="fontDescription" name="KGRedHands" family="KG Red Hands" pointSize="18"/>
+                                <color key="textColor" name="Primary"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="cE0-7r-UZc" firstAttribute="centerY" secondItem="6dm-k1-lXb" secondAttribute="centerY" id="41m-mn-Jl6"/>
+                    <constraint firstItem="A8O-zM-8V7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="FMp-cX-brH"/>
+                    <constraint firstItem="A8O-zM-8V7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="Fdt-iJ-Lqt"/>
+                    <constraint firstItem="6dm-k1-lXb" firstAttribute="top" secondItem="A8O-zM-8V7" secondAttribute="bottom" constant="10" id="On2-5G-tMK"/>
+                    <constraint firstItem="6dm-k1-lXb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="P36-jV-k6m"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="cE0-7r-UZc" secondAttribute="trailing" id="qj7-9K-ElN"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="dateLabel" destination="A8O-zM-8V7" id="aXL-q9-kUl"/>
+                <outlet property="gamePlayLabel" destination="NJW-HP-AEv" id="vP7-73-gSW"/>
+                <outlet property="scoreLabel" destination="cE0-7r-UZc" id="pVD-M8-oBH"/>
+                <outlet property="themeLabel" destination="Fq3-YC-Dnl" id="9tC-Br-e7l"/>
+            </connections>
+            <point key="canvasLocation" x="230.43478260869566" y="66.964285714285708"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="Primary">
+            <color red="0.59999999999999998" green="0.73333333333333328" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Secondary">
+            <color red="0.50196078431372548" green="0.58431372549019611" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import AVFoundation
 
 class SignUpViewController: UIViewController {
     
     let userWebServices: UserWebServices = UserWebServices()
+    
+    var player: AVAudioPlayer!
     
     @IBOutlet weak var pseudoTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -43,10 +46,12 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func cancelPressButton(_ sender: Any) {
+        player = self.setAudioBackButton()
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func signUpPressButton(_ sender: Any) {
+        player = self.setAudioButton()
         guard self.pseudoTextField.text?.count != 0,
               let nickname = self.pseudoTextField.text,
               self.passwordTextField.text?.count != 0,

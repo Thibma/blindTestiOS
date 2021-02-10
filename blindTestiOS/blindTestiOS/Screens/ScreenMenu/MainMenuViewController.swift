@@ -13,7 +13,7 @@ class MainMenuViewController: UIViewController {
     
     let gameplayWebServices: GameplayWebServices = GameplayWebServices()
     let themeWebServices: ThemeWebServices = ThemeWebServices()
-    
+    var player: AVAudioPlayer?
     var user: User!
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var playButton: UIButton!
@@ -40,6 +40,7 @@ class MainMenuViewController: UIViewController {
 
     
     @IBAction func playTouchButton(_ sender: Any) {
+        player = self.setAudioButton()
         self.showSpinner(onView: self.view)
         self.gameplayWebServices.getAllGameplay { (gameplays) in
             self.themeWebServices.getAllThemes { (themes) in
@@ -59,24 +60,36 @@ class MainMenuViewController: UIViewController {
     }
     
     @IBAction func scoresTouchButton(_ sender: Any) {
+        player = self.setAudioButton()
+        self.navigationController?.pushViewController(ScoreMenuViewController(), animated: true)
     }
     @IBAction func optionTouchButton(_ sender: Any) {
+        player = self.setAudioButton()
         let context = LAContext()
         let reason = "Modifier les paramètres"
         
-        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
-            if success {
-                DispatchQueue.main.async { [unowned self] in
-                    let viewController = OptionMenuViewController.newInstance()
-                    self.navigationController?.pushViewController(viewController, animated: true)
+        var error: NSError?
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error){
+            if(error != nil){
+                print("Identification impossible")
+                return
+            }
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason ) { success, error in
+                if success {
+                    DispatchQueue.main.async { [unowned self] in
+                        let viewController = OptionMenuViewController.newInstance()
+                        self.navigationController?.pushViewController(viewController, animated: true)
+                    }
+                } else {
+                    print(error?.localizedDescription ?? "Failed to authenticate")
                 }
-            } else {
-                print(error?.localizedDescription ?? "Failed to authenticate")
             }
         }
+
     }
     
     @IBAction func deconnexionTouchPushButton(_ sender: Any) {
+        player = self.setAudioBackButton()
         UserDefaults.standard.removeObject(forKey: "idUser")
         self.navigationController?.pushViewController(WelcomeViewController(), animated: true)
         self.dismiss(animated: true, completion: nil)

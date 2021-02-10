@@ -46,4 +46,37 @@ class SongWebServices {
         }
         task.resume()
     }
+    
+    func getByBlindtestId(id: String, completion: @escaping (Music?) -> Void) {
+        guard let getByIdUrl = URL(string: API.url + "/song/" + id + API.token) else {
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: getByIdUrl) { (data: Data?, res, err) in
+            guard let bytes = data,
+                  err == nil,
+                  let json = try? JSONSerialization.jsonObject(with: bytes, options: .allowFragments) as? [String: Any] else {
+                DispatchQueue.main.sync {
+                    completion(nil)
+                }
+                return
+            }
+            
+            guard let response = ApiResponseFactory.responseFrom(dictionnary: json),
+                  response.error == false,
+                  let getMusic = SongFactory.musicFrom(dictionnary: ((response.message as? [String: Any])!)) else {
+                DispatchQueue.main.sync {
+                    completion(nil)
+                }
+                return
+                
+            }
+            
+            DispatchQueue.main.sync {
+                completion(getMusic)
+            }
+            
+        }
+        task.resume()
+    }
 }

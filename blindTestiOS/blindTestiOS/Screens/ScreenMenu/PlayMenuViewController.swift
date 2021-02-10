@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import AVFoundation
 
 class PlayMenuViewController: UIViewController {
     
     let songWebServices: SongWebServices = SongWebServices()
     let detailsWebServices: DetailWebServices = DetailWebServices()
+    
+    var player: AVAudioPlayer!
     
     @IBOutlet weak var gameModePickerView: UIPickerView!
     @IBOutlet weak var themePickerView: UIPickerView!
@@ -43,6 +46,7 @@ class PlayMenuViewController: UIViewController {
         
     }
     @IBAction func playTouchButton(_ sender: Any) {
+        player = self.setAudioButton()
         //self.navigationController?.pushViewController(InGameViewController(), animated: true)
         
         // toutes les musiques
@@ -117,6 +121,7 @@ class PlayMenuViewController: UIViewController {
     }
     
     @IBAction func backTouchButton(_ sender: Any) {
+        player = self.setAudioBackButton()
         self.navigationController?.popViewController(animated: true)
     }
     
