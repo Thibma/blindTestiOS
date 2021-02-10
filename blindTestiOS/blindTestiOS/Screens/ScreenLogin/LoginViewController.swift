@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class LoginViewController: UIViewController {
     
@@ -15,6 +16,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var connexionButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    
+    var player: AVAudioPlayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +38,7 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func touchConnexionButton(_ sender: Any) {
+        player = self.setAudioButton()
         guard self.nicknameTextField.text?.count != 0,
               let nickname = self.nicknameTextField.text,
               self.passwordTextField.text?.count != 0,
@@ -65,6 +69,7 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func touchCancelButton(_ sender: Any) {
+        player = self.setAudioBackButton()
         self.navigationController?.popViewController(animated: true)
     }
     

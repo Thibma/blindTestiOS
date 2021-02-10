@@ -14,13 +14,27 @@
 		930A8AFA25B1B1A4001D91CF /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930A8AF825B1B1A4001D91CF /* WelcomeViewController.swift */; };
 		930A8AFB25B1B1A4001D91CF /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 930A8AF925B1B1A4001D91CF /* WelcomeViewController.xib */; };
 		930A8B0525B1DE29001D91CF /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930A8B0425B1DE29001D91CF /* GameKit.framework */; };
+		933E858925D15BA800D50E33 /* ResultGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933E858725D15BA800D50E33 /* ResultGameViewController.swift */; };
+		933E858A25D15BA800D50E33 /* ResultGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 933E858825D15BA800D50E33 /* ResultGameViewController.xib */; };
 		9345B7DF25BDAF0700E2B406 /* InGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9345B7DD25BDAF0700E2B406 /* InGameViewController.swift */; };
 		9345B7E025BDAF0700E2B406 /* InGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9345B7DE25BDAF0700E2B406 /* InGameViewController.xib */; };
+		93523E6D25D2C56000167D24 /* ButtonSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 93523E6C25D2C56000167D24 /* ButtonSound.wav */; };
+		93523E8025D2C94E00167D24 /* BackButton.wav in Resources */ = {isa = PBXBuildFile; fileRef = 93523E7F25D2C94E00167D24 /* BackButton.wav */; };
+		93523E8725D2CD7A00167D24 /* Correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = 93523E8525D2CD7A00167D24 /* Correct.wav */; };
+		93523E8F25D2CE8100167D24 /* Incorrect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93523E8E25D2CE8100167D24 /* Incorrect.mp3 */; };
 		9365846C25BEDE82002E6CB6 /* UserWebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9365846B25BEDE82002E6CB6 /* UserWebServices.swift */; };
 		9365847325BEDEEE002E6CB6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9365847225BEDEEE002E6CB6 /* API.swift */; };
 		9366E07225BB58D20043DEE0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9366E07125BB58D20043DEE0 /* User.swift */; };
 		9366E07725BB58DE0043DEE0 /* UserFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9366E07625BB58DE0043DEE0 /* UserFactory.swift */; };
+		937F319125D2DDB300012BA9 /* HistoricViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937F318F25D2DDB300012BA9 /* HistoricViewController.swift */; };
+		937F319225D2DDB300012BA9 /* HistoricViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 937F319025D2DDB300012BA9 /* HistoricViewController.xib */; };
+		937F319825D2DE1800012BA9 /* HistoricTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937F319625D2DE1800012BA9 /* HistoricTableViewCell.swift */; };
+		937F319925D2DE1800012BA9 /* HistoricTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 937F319725D2DE1800012BA9 /* HistoricTableViewCell.xib */; };
 		937FE0D825BB41AA00527447 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937FE0D725BB41AA00527447 /* UITextField.swift */; };
+		93972DD825D177DE00FF9628 /* BindtestWebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93972DD725D177DE00FF9628 /* BindtestWebServices.swift */; };
+		93972DDD25D1787C00FF9628 /* BlindtestFacroty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93972DDC25D1787C00FF9628 /* BlindtestFacroty.swift */; };
+		93972DE225D17DFD00FF9628 /* GameFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93972DE125D17DFD00FF9628 /* GameFactory.swift */; };
+		93972DE725D1819800FF9628 /* GameWebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93972DE625D1819800FF9628 /* GameWebServices.swift */; };
 		93984FE425CDC7C900AD2FF1 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93984FE225CDC7C900AD2FF1 /* PauseViewController.swift */; };
 		93984FE525CDC7C900AD2FF1 /* PauseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93984FE325CDC7C900AD2FF1 /* PauseViewController.xib */; };
 		9398948925BEE1C400906699 /* ApiResponseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9398948825BEE1C400906699 /* ApiResponseFactory.swift */; };
@@ -45,6 +59,10 @@
 		93BA3C4325C9A639001520D2 /* GameplayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BA3C4225C9A639001520D2 /* GameplayFactory.swift */; };
 		93BA3C4825C9CBCC001520D2 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BA3C4725C9CBCC001520D2 /* Theme.swift */; };
 		93BA3C5525C9CEB7001520D2 /* ThemeWebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BA3C5425C9CEB7001520D2 /* ThemeWebServices.swift */; };
+		93C0E89025D3086500731C6F /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C0E88E25D3086500731C6F /* RecordViewController.swift */; };
+		93C0E89125D3086500731C6F /* RecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93C0E88F25D3086500731C6F /* RecordViewController.xib */; };
+		93C0E89A25D3E77900731C6F /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C0E89825D3E77900731C6F /* RecordTableViewCell.swift */; };
+		93C0E89B25D3E77900731C6F /* RecordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93C0E89925D3E77900731C6F /* RecordTableViewCell.xib */; };
 		93DE44D525BB89550040AE5E /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DE44D325BB89550040AE5E /* MainMenuViewController.swift */; };
 		93DE44D625BB89550040AE5E /* MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93DE44D425BB89550040AE5E /* MainMenuViewController.xib */; };
 		93F13DDF25D14D4E00C0EA8A /* ThemeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F13DDE25D14D4E00C0EA8A /* ThemeFactory.swift */; };
@@ -90,13 +108,27 @@
 		930A8AF825B1B1A4001D91CF /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		930A8AF925B1B1A4001D91CF /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 		930A8B0425B1DE29001D91CF /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		933E858725D15BA800D50E33 /* ResultGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultGameViewController.swift; sourceTree = "<group>"; };
+		933E858825D15BA800D50E33 /* ResultGameViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultGameViewController.xib; sourceTree = "<group>"; };
 		9345B7DD25BDAF0700E2B406 /* InGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InGameViewController.swift; sourceTree = "<group>"; };
 		9345B7DE25BDAF0700E2B406 /* InGameViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InGameViewController.xib; sourceTree = "<group>"; };
+		93523E6C25D2C56000167D24 /* ButtonSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonSound.wav; sourceTree = "<group>"; };
+		93523E7F25D2C94E00167D24 /* BackButton.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BackButton.wav; sourceTree = "<group>"; };
+		93523E8525D2CD7A00167D24 /* Correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Correct.wav; sourceTree = "<group>"; };
+		93523E8E25D2CE8100167D24 /* Incorrect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Incorrect.mp3; sourceTree = "<group>"; };
 		9365846B25BEDE82002E6CB6 /* UserWebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWebServices.swift; sourceTree = "<group>"; };
 		9365847225BEDEEE002E6CB6 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		9366E07125BB58D20043DEE0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9366E07625BB58DE0043DEE0 /* UserFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFactory.swift; sourceTree = "<group>"; };
+		937F318F25D2DDB300012BA9 /* HistoricViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricViewController.swift; sourceTree = "<group>"; };
+		937F319025D2DDB300012BA9 /* HistoricViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoricViewController.xib; sourceTree = "<group>"; };
+		937F319625D2DE1800012BA9 /* HistoricTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricTableViewCell.swift; sourceTree = "<group>"; };
+		937F319725D2DE1800012BA9 /* HistoricTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoricTableViewCell.xib; sourceTree = "<group>"; };
 		937FE0D725BB41AA00527447 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		93972DD725D177DE00FF9628 /* BindtestWebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindtestWebServices.swift; sourceTree = "<group>"; };
+		93972DDC25D1787C00FF9628 /* BlindtestFacroty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlindtestFacroty.swift; sourceTree = "<group>"; };
+		93972DE125D17DFD00FF9628 /* GameFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFactory.swift; sourceTree = "<group>"; };
+		93972DE625D1819800FF9628 /* GameWebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameWebServices.swift; sourceTree = "<group>"; };
 		93984FE225CDC7C900AD2FF1 /* PauseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
 		93984FE325CDC7C900AD2FF1 /* PauseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PauseViewController.xib; sourceTree = "<group>"; };
 		9398948825BEE1C400906699 /* ApiResponseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponseFactory.swift; sourceTree = "<group>"; };
@@ -121,6 +153,10 @@
 		93BA3C4225C9A639001520D2 /* GameplayFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayFactory.swift; sourceTree = "<group>"; };
 		93BA3C4725C9CBCC001520D2 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		93BA3C5425C9CEB7001520D2 /* ThemeWebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeWebServices.swift; sourceTree = "<group>"; };
+		93C0E88E25D3086500731C6F /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		93C0E88F25D3086500731C6F /* RecordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordViewController.xib; sourceTree = "<group>"; };
+		93C0E89825D3E77900731C6F /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
+		93C0E89925D3E77900731C6F /* RecordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordTableViewCell.xib; sourceTree = "<group>"; };
 		93DE44D325BB89550040AE5E /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		93DE44D425BB89550040AE5E /* MainMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenuViewController.xib; sourceTree = "<group>"; };
 		93F13DDE25D14D4E00C0EA8A /* ThemeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeFactory.swift; sourceTree = "<group>"; };
@@ -191,6 +227,7 @@
 				93AC011E25B8C041009F29CF /* Extensions */,
 				9345B7E725BEDA4300E2B406 /* Screens */,
 				930A8B3B25B25E24001D91CF /* fonts */,
+				93523E6B25D2C54E00167D24 /* sounds */,
 				930A8ABE25B1B01B001D91CF /* AppDelegate.swift */,
 				930A8AC725B1B01C001D91CF /* Assets.xcassets */,
 				930A8ACC25B1B01C001D91CF /* Info.plist */,
@@ -241,6 +278,8 @@
 				93F16BDE25CC62D5007DB346 /* TimerCircle.swift */,
 				93984FE225CDC7C900AD2FF1 /* PauseViewController.swift */,
 				93984FE325CDC7C900AD2FF1 /* PauseViewController.xib */,
+				933E858725D15BA800D50E33 /* ResultGameViewController.swift */,
+				933E858825D15BA800D50E33 /* ResultGameViewController.xib */,
 			);
 			path = ScreenGame;
 			sourceTree = "<group>";
@@ -267,6 +306,17 @@
 			path = ScreenWelcome;
 			sourceTree = "<group>";
 		};
+		93523E6B25D2C54E00167D24 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				93523E8E25D2CE8100167D24 /* Incorrect.mp3 */,
+				93523E8525D2CD7A00167D24 /* Correct.wav */,
+				93523E7F25D2C94E00167D24 /* BackButton.wav */,
+				93523E6C25D2C56000167D24 /* ButtonSound.wav */,
+			);
+			path = sounds;
+			sourceTree = "<group>";
+		};
 		9365847025BEDE86002E6CB6 /* Http */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +325,8 @@
 				93BA3C5425C9CEB7001520D2 /* ThemeWebServices.swift */,
 				93F16BFA25CC7C98007DB346 /* SongWebServices.swift */,
 				93F16C0925CC8B42007DB346 /* DetailWebServices.swift */,
+				93972DD725D177DE00FF9628 /* BindtestWebServices.swift */,
+				93972DE625D1819800FF9628 /* GameWebServices.swift */,
 			);
 			path = Http;
 			sourceTree = "<group>";
@@ -288,6 +340,8 @@
 				93F16BFF25CC7DB6007DB346 /* SongFactory.swift */,
 				93F16C0425CC89BA007DB346 /* DetailFactory.swift */,
 				93F13DDE25D14D4E00C0EA8A /* ThemeFactory.swift */,
+				93972DDC25D1787C00FF9628 /* BlindtestFacroty.swift */,
+				93972DE125D17DFD00FF9628 /* GameFactory.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -317,6 +371,17 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		937F319D25D3002000012BA9 /* Historic */ = {
+			isa = PBXGroup;
+			children = (
+				937F318F25D2DDB300012BA9 /* HistoricViewController.swift */,
+				937F319025D2DDB300012BA9 /* HistoricViewController.xib */,
+				937F319625D2DE1800012BA9 /* HistoricTableViewCell.swift */,
+				937F319725D2DE1800012BA9 /* HistoricTableViewCell.xib */,
+			);
+			path = Historic;
+			sourceTree = "<group>";
+		};
 		93AC010525B8BAF1009F29CF /* ScreenLogin */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,6 +402,17 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		93C0E88D25D3084900731C6F /* Records */ = {
+			isa = PBXGroup;
+			children = (
+				93C0E88E25D3086500731C6F /* RecordViewController.swift */,
+				93C0E88F25D3086500731C6F /* RecordViewController.xib */,
+				93C0E89825D3E77900731C6F /* RecordTableViewCell.swift */,
+				93C0E89925D3E77900731C6F /* RecordTableViewCell.xib */,
+			);
+			path = Records;
+			sourceTree = "<group>";
+		};
 		93DE44CF25BB89090040AE5E /* ScreenMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +422,8 @@
 				93BA3C0025C97102001520D2 /* PlayMenuViewController.xib */,
 				93BA3C0625C97115001520D2 /* ScoreMenuViewController.swift */,
 				93BA3C0725C97115001520D2 /* ScoreMenuViewController.xib */,
+				937F319D25D3002000012BA9 /* Historic */,
+				93C0E88D25D3084900731C6F /* Records */,
 				93BA3C0D25C97129001520D2 /* OptionMenuViewController.swift */,
 				93BA3C0E25C97129001520D2 /* OptionMenuViewController.xib */,
 			);
@@ -455,6 +533,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93C0E89B25D3E77900731C6F /* RecordTableViewCell.xib in Resources */,
+				937F319225D2DDB300012BA9 /* HistoricViewController.xib in Resources */,
 				93DE44D625BB89550040AE5E /* MainMenuViewController.xib in Resources */,
 				9345B7E025BDAF0700E2B406 /* InGameViewController.xib in Resources */,
 				93BA3C3425C98111001520D2 /* PORKYS_.TTF in Resources */,
@@ -462,11 +542,18 @@
 				93BA3C0925C97115001520D2 /* ScoreMenuViewController.xib in Resources */,
 				93AC011A25B8BB79009F29CF /* WaitingScreenViewController.xib in Resources */,
 				93AC011325B8BB22009F29CF /* SignUpViewController.xib in Resources */,
+				93523E8725D2CD7A00167D24 /* Correct.wav in Resources */,
+				93523E8025D2C94E00167D24 /* BackButton.wav in Resources */,
 				93BA3C1025C97129001520D2 /* OptionMenuViewController.xib in Resources */,
+				93C0E89125D3086500731C6F /* RecordViewController.xib in Resources */,
 				93AC010925B8BB02009F29CF /* LoginViewController.xib in Resources */,
 				930A8AC825B1B01C001D91CF /* Assets.xcassets in Resources */,
+				93523E8F25D2CE8100167D24 /* Incorrect.mp3 in Resources */,
+				937F319925D2DE1800012BA9 /* HistoricTableViewCell.xib in Resources */,
 				93BA3C2C25C980F3001520D2 /* KGRedHands.ttf in Resources */,
+				933E858A25D15BA800D50E33 /* ResultGameViewController.xib in Resources */,
 				930A8AFB25B1B1A4001D91CF /* WelcomeViewController.xib in Resources */,
+				93523E6D25D2C56000167D24 /* ButtonSound.wav in Resources */,
 				93BA3C0225C97102001520D2 /* PlayMenuViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,7 +582,10 @@
 				93AC010825B8BB02009F29CF /* LoginViewController.swift in Sources */,
 				93F16BE725CC69BD007DB346 /* Music.swift in Sources */,
 				93F16BEC25CC69C7007DB346 /* Detail.swift in Sources */,
+				93C0E89025D3086500731C6F /* RecordViewController.swift in Sources */,
 				93BA3C0125C97102001520D2 /* PlayMenuViewController.swift in Sources */,
+				93972DE725D1819800FF9628 /* GameWebServices.swift in Sources */,
+				933E858925D15BA800D50E33 /* ResultGameViewController.swift in Sources */,
 				93BA3C0F25C97129001520D2 /* OptionMenuViewController.swift in Sources */,
 				93984FE425CDC7C900AD2FF1 /* PauseViewController.swift in Sources */,
 				9365846C25BEDE82002E6CB6 /* UserWebServices.swift in Sources */,
@@ -505,18 +595,23 @@
 				93F13DDF25D14D4E00C0EA8A /* ThemeFactory.swift in Sources */,
 				93BA3C5525C9CEB7001520D2 /* ThemeWebServices.swift in Sources */,
 				937FE0D825BB41AA00527447 /* UITextField.swift in Sources */,
+				93972DE225D17DFD00FF9628 /* GameFactory.swift in Sources */,
 				930A8ABF25B1B01B001D91CF /* AppDelegate.swift in Sources */,
 				9366E07725BB58DE0043DEE0 /* UserFactory.swift in Sources */,
 				9398948925BEE1C400906699 /* ApiResponseFactory.swift in Sources */,
 				93BA3C0825C97115001520D2 /* ScoreMenuViewController.swift in Sources */,
 				9345B7DF25BDAF0700E2B406 /* InGameViewController.swift in Sources */,
+				93972DD825D177DE00FF9628 /* BindtestWebServices.swift in Sources */,
 				93F16BF625CC6E89007DB346 /* Game.swift in Sources */,
 				93F16BFB25CC7C98007DB346 /* SongWebServices.swift in Sources */,
 				9366E07225BB58D20043DEE0 /* User.swift in Sources */,
+				93C0E89A25D3E77900731C6F /* RecordTableViewCell.swift in Sources */,
 				9365847325BEDEEE002E6CB6 /* API.swift in Sources */,
 				93BA3C3E25C9A2F7001520D2 /* GameplayWebServices.swift in Sources */,
+				937F319125D2DDB300012BA9 /* HistoricViewController.swift in Sources */,
 				93BA3C4825C9CBCC001520D2 /* Theme.swift in Sources */,
 				93F16C0025CC7DB6007DB346 /* SongFactory.swift in Sources */,
+				937F319825D2DE1800012BA9 /* HistoricTableViewCell.swift in Sources */,
 				93DE44D525BB89550040AE5E /* MainMenuViewController.swift in Sources */,
 				93BA3C3925C9A137001520D2 /* Gameplay.swift in Sources */,
 				93F16C0525CC89BA007DB346 /* DetailFactory.swift in Sources */,
@@ -526,6 +621,7 @@
 				93AC012025B8C059009F29CF /* UiViewController.swift in Sources */,
 				93F16BDF25CC62D5007DB346 /* TimerCircle.swift in Sources */,
 				930A8AFA25B1B1A4001D91CF /* WelcomeViewController.swift in Sources */,
+				93972DDD25D1787C00FF9628 /* BlindtestFacroty.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

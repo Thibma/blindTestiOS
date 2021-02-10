@@ -27,7 +27,7 @@ class TimerCircle {
         
         bgShapeLayer.path = UIBezierPath(arcCenter: CGPoint(x: -30, y: 30), radius:
             25, startAngle: -90.degreesToRadians, endAngle: 270.degreesToRadians, clockwise: true).cgPath
-        bgShapeLayer.strokeColor = UIColor.white.cgColor
+        bgShapeLayer.strokeColor = UIColor(named: "Primary")?.cgColor
         bgShapeLayer.fillColor = UIColor.clear.cgColor
         bgShapeLayer.lineWidth = 5
         uiView.layer.addSublayer(bgShapeLayer)
@@ -35,6 +35,8 @@ class TimerCircle {
         timeLabel = UILabel(frame: CGRect(x: uiView.frame.midX-80 ,y: uiView.frame.midY+5, width: 100, height: 50))
         timeLabel.textAlignment = .center
         timeLabel.text = timeLeft.time
+        timeLabel.font = UIFont(name: "KGRedHands", size: 20)
+        timeLabel.textColor = UIColor(named: "Primary")
         uiView.addSubview(timeLabel)
     }
     

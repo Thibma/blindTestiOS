@@ -24,9 +24,12 @@ class InGameViewController: UIViewController {
     
     @IBOutlet weak var pauseButton: UIButton!
     
-    var player: AVAudioPlayer!
+    let gameWebService: GameWebService = GameWebService()
+    let blindtestWebService: BlindtestWebService = BlindtestWebService()
     
-    var game: Game!
+    var player: AVAudioPlayer!
+    var soundPlayer: AVAudioPlayer!
+    
     var gameplay: Gameplay!
     var theme: Theme!
     
@@ -139,18 +142,22 @@ class InGameViewController: UIViewController {
     }
     
     @IBAction func pushResponse1(_ sender: Any) {
+        soundPlayer = self.setAudioButton()
         chooseResponse(number: 1)
     }
     
     @IBAction func pushResponse2(_ sender: Any) {
+        soundPlayer = self.setAudioButton()
         chooseResponse(number: 2)
     }
     
     @IBAction func pushResponse3(_ sender: Any) {
+        soundPlayer = self.setAudioButton()
         chooseResponse(number: 3)
     }
     
     @IBAction func pushResponse4(_ sender: Any) {
+        soundPlayer = self.setAudioButton()
         chooseResponse(number: 4)
     }
     
@@ -199,6 +206,19 @@ class InGameViewController: UIViewController {
         
         if number == -1 {
             self.stateLabel.text = "Temps écoulé !"
+            
+            guard let sound = Bundle.main.url(forResource: "Incorrect", withExtension: "mp3") else {
+                return
+            }
+            
+            guard let player = try? AVAudioPlayer(contentsOf: sound) else {
+                return
+            }
+            
+            player.volume = 0.5
+            player.play()
+            self.player = player
+            
             switch goodResponse {
             case 1:
                 self.response1Button.backgroundColor = .systemGreen
@@ -219,6 +239,19 @@ class InGameViewController: UIViewController {
         }
         else {
             if number == goodResponse {
+                
+                guard let sound = Bundle.main.url(forResource: "Correct", withExtension: "wav") else {
+                    return
+                }
+                
+                guard let player = try? AVAudioPlayer(contentsOf: sound) else {
+                    return
+                }
+                
+                player.volume = 0.5
+                player.play()
+                self.player = player
+                
                 self.stateLabel.text = "Bonne réponse ! + \(Int(timer.timeLeft) + 1) point(s) !"
                 switch goodResponse {
                 case 1:
@@ -241,6 +274,19 @@ class InGameViewController: UIViewController {
                 blindtest.append(Blindtest(score: Int(timer.timeLeft) + 1, musicId: musicInGame[currentMusic].id))
             }
             else {
+                
+                guard let sound = Bundle.main.url(forResource: "Incorrect", withExtension: "mp3") else {
+                    return
+                }
+                
+                guard let player = try? AVAudioPlayer(contentsOf: sound) else {
+                    return
+                }
+                
+                player.volume = 0.5
+                player.play()
+                self.player = player
+                
                 self.stateLabel.text = "Mauvaise réponse !"
                 switch number {
                 case 1:
@@ -288,6 +334,7 @@ class InGameViewController: UIViewController {
     }
     
     @IBAction func pausePressButton(_ sender: Any) {
+        soundPlayer = self.setAudioBackButton()
         self.pauseTimer()
         player.pause()
         PauseViewController.showPause(parentVC: self)
@@ -339,7 +386,26 @@ class InGameViewController: UIViewController {
     func endGame() {
         print(blindtest.count)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            print("ECRAN DES RESULTATS + UPLOAD API")
+            let game = Game(score: self.score, idGameplay: self.gameplay.id, idUser: UserDefaults.standard.string(forKey: "idUser")!)
+            self.gameWebService.saveGame(game: game) { (getGame) in
+                for oneBlindTest in self.blindtest {
+                    oneBlindTest.gameId = getGame?.id
+                }
+                
+                let count = 0;
+                self.sendBlindtest(count: count, game: getGame!)
+            }
+        }
+    }
+    
+    func sendBlindtest(count: Int, game: Game) {
+        if count == blindtest.count {
+            let viewController = ResultGameViewController.newInstance(gameplay: gameplay, theme: theme, song: currentMusic, game: game)
+            self.navigationController?.pushViewController(viewController, animated: true)
+        } else {
+            self.blindtestWebService.saveBlindtest(blindtest: blindtest[count]) { (bool) in
+                self.sendBlindtest(count: count + 1, game: game)
+            }
         }
     }
 }

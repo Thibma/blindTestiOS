@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 var vSpinner: UIView?
 
@@ -39,5 +40,33 @@ extension UIViewController {
             vSpinner?.removeFromSuperview()
             vSpinner = nil
         }
+    }
+    
+    func setAudioButton() -> AVAudioPlayer? {
+        guard let sound = Bundle.main.url(forResource: "ButtonSound", withExtension: "wav") else {
+            return nil
+        }
+        
+        guard let player = try? AVAudioPlayer(contentsOf: sound) else {
+            return nil
+        }
+        
+        player.volume = 0.5
+        player.play()
+        return player
+    }
+    
+    func setAudioBackButton() -> AVAudioPlayer? {
+        guard let sound = Bundle.main.url(forResource: "BackButton", withExtension: "wav") else {
+            return nil
+        }
+        
+        guard let player = try? AVAudioPlayer(contentsOf: sound) else {
+            return nil
+        }
+        
+        player.volume = 0.5
+        player.play()
+        return player
     }
 }

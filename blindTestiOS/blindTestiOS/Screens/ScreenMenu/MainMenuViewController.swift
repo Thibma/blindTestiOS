@@ -12,7 +12,7 @@ class MainMenuViewController: UIViewController {
     
     let gameplayWebServices: GameplayWebServices = GameplayWebServices()
     let themeWebServices: ThemeWebServices = ThemeWebServices()
-    
+    var player: AVAudioPlayer?
     var user: User!
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var playButton: UIButton!
@@ -39,6 +39,7 @@ class MainMenuViewController: UIViewController {
 
     
     @IBAction func playTouchButton(_ sender: Any) {
+        player = self.setAudioButton()
         self.showSpinner(onView: self.view)
         self.gameplayWebServices.getAllGameplay { (gameplays) in
             self.themeWebServices.getAllThemes { (themes) in
@@ -58,10 +59,14 @@ class MainMenuViewController: UIViewController {
     }
     
     @IBAction func scoresTouchButton(_ sender: Any) {
+        player = self.setAudioButton()
+        self.navigationController?.pushViewController(ScoreMenuViewController(), animated: true)
     }
     @IBAction func optionTouchButton(_ sender: Any) {
+        player = self.setAudioButton()
     }
     @IBAction func deconnexionTouchPushButton(_ sender: Any) {
+        player = self.setAudioBackButton()
         UserDefaults.standard.removeObject(forKey: "idUser")
         self.navigationController?.pushViewController(WelcomeViewController(), animated: true)
         self.dismiss(animated: true, completion: nil)

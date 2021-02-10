@@ -48,4 +48,37 @@ class ThemeWebServices {
         
     }
     
+    func getById(id: String, completion: @escaping (Theme?) -> Void) {
+        guard let getByIdUrl = URL(string: API.url + "/theme/" + id + API.token) else {
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: getByIdUrl) { (data: Data?, res, err) in
+            guard let bytes = data,
+                  err == nil,
+                  let json = try? JSONSerialization.jsonObject(with: bytes, options: .allowFragments) as? [String: Any] else {
+                DispatchQueue.main.sync {
+                    completion(nil)
+                }
+                return
+            }
+            
+            guard let response = ApiResponseFactory.responseFrom(dictionnary: json),
+                  response.error == false,
+                  let getTheme = ThemeFactory.themeFrom(dictionnary: ((response.message as? [String: Any])!)) else {
+                DispatchQueue.main.sync {
+                    completion(nil)
+                }
+                return
+                
+            }
+            
+            DispatchQueue.main.sync {
+                completion(getTheme)
+            }
+            
+        }
+        task.resume()
+    }
+    
 }
