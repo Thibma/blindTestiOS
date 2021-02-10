@@ -25,13 +25,6 @@ class OptionMenuViewController: UIViewController {
     let homeName: String = { HomeStore.shared.homeName }()
     let roomName: String = { HomeStore.shared.roomName }()
     
-    lazy var accessoryBrowser: HMAccessoryBrowser = {
-      let browser = HMAccessoryBrowser()
-      browser.delegate = self
-      return browser
-    }()
-    
-
     let accessoryName = "LightBulb"
     
     class func newInstance() -> OptionMenuViewController {
@@ -43,7 +36,7 @@ class OptionMenuViewController: UIViewController {
         super.viewDidLoad()
         
         HomeStore.shared.homeManager.delegate = self
-        // Do any additional setup after loading the view.
+        HomeStore.shared.accessoryBrowser.delegate = self
     }
 
     @IBAction func backBtnAction(_ sender: Any) {
@@ -71,15 +64,14 @@ extension OptionMenuViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDelegate, HMHomeDelegate, HMAccessoryDelegate {
+extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDelegate, HMHomeDelegate {
     
     func homeManagerDidUpdateHomes(_ manager: HMHomeManager) {
-        let home = HomeStore.shared.homeManager.primaryHome
-        if(home == nil) {
+        guard let _: HMHome = HomeStore.shared.homeManager.primaryHome else {
             createHome()
             return
         }
-        
+
         guard let room: HMRoom = HomeStore.shared.homeManager.primaryHome?.getRoom() else {
             createRoom()
             return
@@ -97,7 +89,7 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
             }
             
             HomeStore.shared.homeManager.updatePrimaryHome(home) { (error: Error!) in
-                if(error == nil) {
+                if(error != nil) {
                     print("Could not define primaryhome")
                     return
                 }
@@ -136,7 +128,7 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
         
         print("Could not find the lighbulb accessory in the room")
         print("Starting to search for all available accessories")
-        accessoryBrowser.startSearchingForNewAccessories()
+        HomeStore.shared.accessoryBrowser.startSearchingForNewAccessories()
     }
     
     func accessoryBrowser(_ browser: HMAccessoryBrowser, didFindNewAccessory accessory: HMAccessory) {

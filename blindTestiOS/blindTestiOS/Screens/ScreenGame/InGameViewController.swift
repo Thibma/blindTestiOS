@@ -341,13 +341,13 @@ class InGameViewController: UIViewController {
     }
     
     @objc func updateTime() {
+        updateAccessoriesColor(hue: Hues.start - CGFloat(timer.timeLeft - timer.timeLeft))
         if timer.timeLeft / timer.timeTotal < 0.3 {
             timer.timeLeftShapeLayer.strokeColor = Colors.end.cgColor
-            updateAccessoriesColor(hue: Hues.end)
         }
         else if timer.timeLeft / timer.timeTotal < 0.6 {
             timer.timeLeftShapeLayer.strokeColor = Colors.middle.cgColor
-            updateAccessoriesColor(hue: Hues.middle)
+            //updateAccessoriesColor(hue: Hues.middle)
 
         }
         if timer.timeLeft > 0 {
@@ -408,40 +408,23 @@ extension InGameViewController: PauseViewControllerDelegate {
     
 }
 
-extension InGameViewController: HMHomeManagerDelegate, HMAccessoryDelegate, HMHomeDelegate {
+extension InGameViewController: HMHomeManagerDelegate, HMAccessoryDelegate {
     
     func updateAccessoryColor(accessory: HMAccessory, hue: CGFloat){
-        print("Finding the hue characteristic of the accessory...")
+        let newhue = hue < 0 ? 360 : hue
         
         for service in accessory.services as [HMService]{
             for characteristic in service.characteristics as [HMCharacteristic]{
-                if characteristic.characteristicType != HMCharacteristicTypeHue || !characteristic.isReadable() {
-                    continue
-                }
+                if characteristic.characteristicType != HMCharacteristicTypeHue || !characteristic.isReadable() { continue }
                 
-                print("Reading the value of the hue characteristic... \(characteristic)")
-
                 characteristic.readValue {(error: Error!) in
-                    if error != nil{
-                        print("Cannot read the hue value : \(String(describing: error))")
-                        return
-                    }
-                        
-                    print("Read the hue value. Setting it now...")
-                    if !characteristic.isWritable(){
-                        print("The brightness characteristic is not writable")
-                        return
-                    }
+                    if error != nil { return }
+                    if !characteristic.isWritable() { return  }
                                 
-                    characteristic.writeValue(hue) {(error: Error!) in
-                        if error != nil{
-                            print("Failed to set the hue value")
-                            return
-                        }
-                        print("Successfully set the hue value")
+                    characteristic.writeValue(newhue) {(error: Error!) in
+                        if error != nil { return }
                     }
                 }
-                
             }
         }
     }

@@ -20,9 +20,12 @@ class HomeStore: NSObject {
     let homeManager = HMHomeManager()
     
     /// A set of objects that want to receive home delegate callbacks.
-    var homeDelegates = Set<NSObject>()
+    //ar homeDelegates = Set<NSObject>()
     
     /// A set of objects that want to receive accessory delegate callbacks.
-    var accessoryDelegates = Set<NSObject>()
+    //var accessoryDelegates = Set<NSObject>()
+    
+    var accessoryBrowser = HMAccessoryBrowser()
+
 }
 
