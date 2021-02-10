@@ -19,7 +19,7 @@ class OptionMenuViewController: UIViewController {
     
     
     //var accessories = [HMAccessory]()
-    var home: HMHome!
+    //var home: HMHome!
     var room: HMRoom!
     var accessory = HMAccessory()
     
@@ -32,9 +32,6 @@ class OptionMenuViewController: UIViewController {
     var homeName = "Main Home"
     let roomName = "Main Room"
     let accessoryName = "LightBulb"
-
-    var homeManager: HMHomeManager!
-    
     
     class func newInstance() -> OptionMenuViewController {
         let optionMenuVC = OptionMenuViewController()
@@ -44,8 +41,7 @@ class OptionMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        homeManager = HMHomeManager()
-        homeManager.delegate = self
+        HomeStore.shared.homeManager.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -77,16 +73,13 @@ extension OptionMenuViewController: UITableViewDelegate, UITableViewDataSource {
 extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDelegate {
     
     func homeManagerDidUpdateHomes(_ manager: HMHomeManager) {
-        let home = homeManager.homes.first(where: { $0.name == homeName })
+        let home = HomeStore.shared.homeManager.primaryHome
         if(home == nil) {
             createHome()
             return
         }
         
-        self.home = home!
-        print("Found home : \(self.home!)")
-        
-        let room = self.home.rooms.first(where: { $0.name == roomName})
+        let room = HomeStore.shared.homeManager.primaryHome?.rooms.first(where: { $0.name == roomName})
         if room == nil {
             createRoom()
             return
@@ -97,21 +90,27 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
     }
     
     func createHome(){
-        homeManager.addHome(withName: homeName){ (home: HMHome!, error: Error!) in
+        HomeStore.shared.homeManager.addHome(withName: homeName){ (home: HMHome!, error: Error!) in
             if error != nil {
                 print("Could not add the home")
                 return
             }
             
-            self.home = home
-            print("Successfully added the home")
-            print("Creating the room...")
-            self.createRoom()
+            HomeStore.shared.homeManager.updatePrimaryHome(home) { (error: Error!) in
+                if(error == nil) {
+                    print("Could not define primaryhome")
+                    return
+                }
+                print("Successfully added the home")
+                print("Creating the room...")
+                self.createRoom()
+            }
+            
         }
     }
     
     func createRoom(){
-        home.addRoom(withName: roomName){ (room: HMRoom!, error: Error!) in
+        HomeStore.shared.homeManager.primaryHome?.addRoom(withName: roomName){ (room: HMRoom!, error: Error!) in
             if error != nil {
                 print("Failed to create the room...")
                 return
@@ -149,7 +148,7 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
         }
         
         print("Adding it to the home...")
-        home.addAccessory(accessory){(error: Error!) in
+        HomeStore.shared.homeManager.primaryHome?.addAccessory(accessory){(error: Error!) in
             if error != nil {
                 print("Failed to add the accessory to the home")
                 print("Error = \(String(describing: error))")
@@ -159,7 +158,7 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
             print("Successfully added the accessory to the home")
             print("Assigning the lightbulb to the room...")
             
-            self.home.assignAccessory(accessory, to: self.room){ (error) in
+            HomeStore.shared.homeManager.primaryHome?.assignAccessory(accessory, to: self.room){ (error) in
                 if error != nil{
                     print("Failed to assign the accessory to the room")
                     print("Error = \(String(describing: error))")
