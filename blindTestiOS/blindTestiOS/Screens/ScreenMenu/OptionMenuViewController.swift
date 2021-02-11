@@ -7,10 +7,13 @@
 
 import UIKit
 import HomeKit
+import AVFoundation
 
 class OptionMenuViewController: UIViewController {
     @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var backBtn: UIButton!
+    
+    var player: AVAudioPlayer!
     
     let homeName: String = { HomeStore.shared.homeName }()
     let roomName: String = { HomeStore.shared.roomName }()
@@ -30,10 +33,12 @@ class OptionMenuViewController: UIViewController {
     }
 
     @IBAction func backBtnAction(_ sender: Any) {
+        player = setAudioBackButton()
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func addBtnAction(_ sender: Any) {
+        player = setAudioButton()
         findHomeWithLightBulbAccessory()
     }
 }
