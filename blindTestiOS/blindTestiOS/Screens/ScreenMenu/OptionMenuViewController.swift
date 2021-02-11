@@ -89,8 +89,7 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
     
     func findHomeWithLightBulbAccessory() {
         guard let room: HMRoom = HomeStore.shared.homeManager.primaryHome?.getRoom() else { return }
-        let accessories: [HMAccessory] = room.getAccessories()
-        print(accessories)
+        let _: [HMAccessory] = room.getAccessories()
         HomeStore.shared.accessoryBrowser.startSearchingForNewAccessories()
     }
     
