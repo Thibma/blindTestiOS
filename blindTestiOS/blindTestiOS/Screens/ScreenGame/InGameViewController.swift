@@ -59,6 +59,9 @@ class InGameViewController: UIViewController {
         static var middle: CGFloat = 20
         static var end: CGFloat = 360
     }
+    
+    let hueValue = Hues.start
+    
     let homeName: String = { HomeStore.shared.homeName }()
     let roomName: String = { HomeStore.shared.roomName }()
     var accessories: [HMAccessory] = []
@@ -388,11 +391,15 @@ class InGameViewController: UIViewController {
     @objc func updateTime() {
         if timer.timeLeft / timer.timeTotal < 0.3 {
             timer.timeLeftShapeLayer.strokeColor = Colors.end.cgColor
-            updateAccessoriesColor(hue: Hues.end)
+            if(hueValue != Hues.end){
+                updateAccessoriesColor(hue: Hues.end)
+            }
         }
         else if timer.timeLeft / timer.timeTotal < 0.6 {
             timer.timeLeftShapeLayer.strokeColor = Colors.middle.cgColor
-            updateAccessoriesColor(hue: Hues.middle)
+            if(hueValue != Hues.middle){
+                updateAccessoriesColor(hue: Hues.middle)
+            }
         }
         if timer.timeLeft > 0 {
             timer.timeLeft = timer.endTime?.timeIntervalSinceNow ?? 0
