@@ -33,8 +33,10 @@ class OptionMenuViewController: UIViewController {
     }
 
     @IBAction func backBtnAction(_ sender: Any) {
+
         player = setAudioBackButton()
         self.navigationController?.popViewController(animated: true)
+
     }
     
     @IBAction func addBtnAction(_ sender: Any) {
@@ -71,7 +73,6 @@ extension OptionMenuViewController: HMHomeManagerDelegate, HMAccessoryBrowserDel
                 }
                 self.createRoom()
             }
-            
         }
     }
     

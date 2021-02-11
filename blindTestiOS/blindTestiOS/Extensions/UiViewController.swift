@@ -45,9 +45,11 @@ extension UIViewController {
     
     func showMessage(message: String) {
         alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        let actionOK = UIAlertAction(title: "OK", style: .default) { _ in }
+        let actionOK = UIAlertAction(title: "OK", style: .default) { _ in self.removeMessage() }
         alert?.addAction(actionOK)
-        self.present(alert!, animated: true){}
+        DispatchQueue.main.sync {
+            self.present(alert!, animated: true){}
+        }
     }
     
     func removeMessage(){
